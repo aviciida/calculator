@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29F6C77C233B9E2E0056CB5C /* Calculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F6C77B233B9E2E0056CB5C /* Calculations.swift */; };
 		A8FCF33622826F4D00E6050A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FCF33522826F4D00E6050A /* AppDelegate.swift */; };
 		A8FCF33822826F4D00E6050A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FCF33722826F4D00E6050A /* ViewController.swift */; };
 		A8FCF33B22826F4E00E6050A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8FCF33922826F4E00E6050A /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29F6C77B233B9E2E0056CB5C /* Calculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculations.swift; sourceTree = "<group>"; };
 		A8FCF33222826F4D00E6050A /* CalculatorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalculatorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8FCF33522826F4D00E6050A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A8FCF33722826F4D00E6050A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			children = (
 				A8FCF33522826F4D00E6050A /* AppDelegate.swift */,
 				A8FCF33722826F4D00E6050A /* ViewController.swift */,
+				29F6C77B233B9E2E0056CB5C /* Calculations.swift */,
 				A8FCF33922826F4E00E6050A /* Main.storyboard */,
 				A8FCF347228283B300E6050A /* calculation.swift */,
 				A8FCF33C22826F4F00E6050A /* Assets.xcassets */,
@@ -140,6 +143,7 @@
 			files = (
 				A8FCF33822826F4D00E6050A /* ViewController.swift in Sources */,
 				A8FCF33622826F4D00E6050A /* AppDelegate.swift in Sources */,
+				29F6C77C233B9E2E0056CB5C /* Calculations.swift in Sources */,
 				A8FCF348228283B300E6050A /* calculation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
