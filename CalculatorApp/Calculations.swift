@@ -10,16 +10,6 @@ import Foundation
 
 
 struct Calculations {
-    var processPrevNumber: String = ""
-    var processInputNumber: String = ""
-    var processTotalNumber: String = ""
-    var prevNumber: String = ""
-    var inputNumber: String = ""
-    var resultNumber: Int = 0
-    var isOpen: Bool = true
-    var isCalculated: Bool = false
-    var operation: Operation = .add
-
     // Input: isOpen, prevNumber, inputNumber
     // Output: newPrevNumber, newInputNumber, newDisplayNumber
     static func popNumber(isOpen: Bool,

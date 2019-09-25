@@ -84,19 +84,10 @@ class ViewController: UIViewController {
     
 
     @IBAction func popNumber (_ sender: UIButton) {
-        let output = Calculations.popNumber(isOpen: isOpen, prevNumber: prevNumber, inputNumber: inputNumber)
-        
+        let output = Calculations.popNumber(isOpen: isOpen, prevNumber: prevNumber, inputNumber: inputNumber)        
         prevNumber = output.prevNumber
         inputNumber = output.inputNumber
         displayNumber.text = output.displayNumber
-//        if isOpen == true {
-//            prevNumber = String(prevNumber.dropLast())
-//            // inputNumber  = newInputNumber
-//            displayNumber.text = prevNumber
-//        } else {
-//            inputNumber = String(inputNumber.dropLast())
-//            displayNumber.text = inputNumber
-//        }
     }
     
     @IBAction func calculation (_ sender: UIButton) {
