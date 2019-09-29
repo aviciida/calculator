@@ -64,19 +64,10 @@ class ViewController: UIViewController {
                 displayNumber.text = inputNumber
                 processInputNumber = inputNumber
                 
-                
                 if isCalculated == false {
                 processNumber.text = processPrevNumber + processInputNumber
-                    print("isOpenはfalseでcalculatedはfalse")
-                    print("processPrevは\(processPrevNumber)")
-                    print("processInputは\(processInputNumber)")
-                    print("processTotalは\(processTotalNumber)")
                 } else {
                     processNumber.text = processTotalNumber + processInputNumber
-                    print("isOpenはfalseでcalculatedはtrue")
-                    print("processPrevは\(processPrevNumber)")
-                    print("processInputは\(processInputNumber)")
-                    print("processTotalは\(processTotalNumber)")
                 }
             }
         }
