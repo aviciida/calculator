@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A8A84806234050F0004EFB31 /* Calculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A84805234050F0004EFB31 /* Calculations.swift */; };
 		A8FCF33622826F4D00E6050A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FCF33522826F4D00E6050A /* AppDelegate.swift */; };
 		A8FCF33822826F4D00E6050A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FCF33722826F4D00E6050A /* ViewController.swift */; };
 		A8FCF33B22826F4E00E6050A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8FCF33922826F4E00E6050A /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A8A84805234050F0004EFB31 /* Calculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculations.swift; sourceTree = "<group>"; };
 		A8FCF33222826F4D00E6050A /* CalculatorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalculatorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8FCF33522826F4D00E6050A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A8FCF33722826F4D00E6050A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				A8FCF33722826F4D00E6050A /* ViewController.swift */,
 				A8FCF33922826F4E00E6050A /* Main.storyboard */,
 				A8FCF347228283B300E6050A /* Calculation.swift */,
+				A8A84805234050F0004EFB31 /* Calculations.swift */,
 				A8FCF33C22826F4F00E6050A /* Assets.xcassets */,
 				A8FCF33E22826F4F00E6050A /* LaunchScreen.storyboard */,
 				A8FCF34122826F4F00E6050A /* Info.plist */,
@@ -141,6 +144,7 @@
 				A8FCF33822826F4D00E6050A /* ViewController.swift in Sources */,
 				A8FCF33622826F4D00E6050A /* AppDelegate.swift in Sources */,
 				A8FCF348228283B300E6050A /* Calculation.swift in Sources */,
+				A8A84806234050F0004EFB31 /* Calculations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
