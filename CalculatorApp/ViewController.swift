@@ -49,28 +49,20 @@ class ViewController: UIViewController {
     }
     
     @IBAction func addNumber (_ sender: UIButton) {
-        if isOpen == true {
-            if sender.tag == 0 && prevNumber.count == 0 {
-            } else {
-                prevNumber += String(sender.tag)
-                displayNumber.text = prevNumber
-                processPrevNumber = prevNumber
-                processNumber.text = processPrevNumber
-            }
-        } else {
-            if sender.tag == 0 && inputNumber.count == 0 {
-            } else {
-                inputNumber += String(sender.tag)
-                displayNumber.text = inputNumber
-                processInputNumber = inputNumber
-                
-                if isCalculated == false {
-                processNumber.text = processPrevNumber + processInputNumber
-                } else {
-                    processNumber.text = processTotalNumber + processInputNumber
-                }
-            }
-        }
+        let op = Calculations.addNumber(senderTag: sender.tag,
+                                        isOpen: isOpen,
+                                        isCalculated: isCalculated,
+                                        prevNumber: prevNumber,
+                                        processPrevNumber: processPrevNumber,
+                                        processInputNumber: processInputNumber,
+                                        processTotalNumber: processTotalNumber,
+                                        inputNumber: inputNumber)
+        displayNumber.text = op.newDisplayNumber
+        prevNumber = op.newPrevNumber
+        processPrevNumber = op.newProcessPrevNumber
+        processNumber.text = op.newProcessNumber
+        inputNumber = op.newInputNumber
+        processInputNumber = op.newProcessInputNumber
     }
     
 

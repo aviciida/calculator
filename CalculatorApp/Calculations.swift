@@ -28,6 +28,57 @@ struct Calculations {
                 newPrevNumber = prevNumber
             }
             return (newPrevNumber, newInputNumber, newDisplayNumber)
+    }
+    
+    static func addNumber(senderTag: Int,
+                          isOpen: Bool,
+                          isCalculated: Bool,
+                          prevNumber: String,
+                          processPrevNumber: String,
+                          processInputNumber: String,
+                          processTotalNumber: String,
+                          inputNumber: String)
+        ->
+        (newPrevNumber: String,
+        newDisplayNumber: String,
+        newProcessPrevNumber: String,
+        newProcessInputNumber: String,
+        newInputNumber: String,
+        newProcessNumber: String) {
             
+            let newPrevNumber: String
+            let newDisplayNumber: String
+            let newProcessPrevNumber: String
+            let newProcessInputNumber: String
+            let newInputNumber: String
+            let newProcessNumber: String
+            let unableToAppendNumber: Bool = senderTag == 0 && prevNumber.count == 0
+            if unableToAppendNumber {
+                newPrevNumber = prevNumber
+                newDisplayNumber = "0"
+                newProcessPrevNumber = processPrevNumber
+                newProcessInputNumber = processInputNumber
+                newInputNumber = inputNumber
+                newProcessNumber = "0"
+                return (newPrevNumber, newDisplayNumber, newProcessPrevNumber, newProcessInputNumber, newInputNumber, newProcessNumber)
+            }
+            
+            if isOpen {
+                newPrevNumber = prevNumber + String(senderTag)
+                newDisplayNumber = newPrevNumber
+                newProcessPrevNumber = newPrevNumber
+                newProcessInputNumber = processInputNumber
+                newInputNumber = inputNumber
+                newProcessNumber = newProcessPrevNumber
+            } else {
+                newInputNumber = String(senderTag)
+                newDisplayNumber = newInputNumber
+                newPrevNumber = prevNumber
+                newProcessInputNumber = newInputNumber
+                newProcessPrevNumber = processPrevNumber
+                newProcessNumber = isCalculated ? (processTotalNumber + processInputNumber) : (processTotalNumber + processInputNumber)
+            }
+            
+            return (newPrevNumber, newDisplayNumber, newProcessPrevNumber, newProcessInputNumber, newInputNumber, newProcessNumber)
     }
 }
