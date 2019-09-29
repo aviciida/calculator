@@ -20,13 +20,12 @@ struct Calculations {
             let newDisplayNumber: String
             if isOpen {
                 newPrevNumber = String(prevNumber.dropLast())
-                newInputNumber = inputNumber
                 newDisplayNumber = newPrevNumber
-                
+                newInputNumber = inputNumber
             } else {
                 newInputNumber = String(inputNumber.dropLast())
-                newPrevNumber = prevNumber
                 newDisplayNumber = newInputNumber
+                newPrevNumber = prevNumber
             }
             return (newPrevNumber, newInputNumber, newDisplayNumber)
             
