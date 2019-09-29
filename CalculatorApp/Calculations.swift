@@ -52,8 +52,8 @@ struct Calculations {
             let newProcessInputNumber: String
             let newInputNumber: String
             let newProcessNumber: String
-            let unableToAppendNumber: Bool = senderTag == 0 && prevNumber.count == 0
-            if unableToAppendNumber {
+            let isAbleToAppendNumber: Bool = senderTag > 0 && prevNumber.count > 0
+            if !isAbleToAppendNumber {
                 newPrevNumber = prevNumber
                 newDisplayNumber = "0"
                 newProcessPrevNumber = processPrevNumber
