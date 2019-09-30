@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     var resultNumber: Int = 0
     var isOpen: Bool = true
     var isCalculated: Bool = false
-    var operation: Operation = .add
+    var operation: OperationType = .add
     
     @IBOutlet weak var one: UIButton!
     @IBOutlet weak var two: UIButton!
@@ -64,19 +64,10 @@ class ViewController: UIViewController {
                 displayNumber.text = inputNumber
                 processInputNumber = inputNumber
                 
-                
                 if isCalculated == false {
                 processNumber.text = processPrevNumber + processInputNumber
-                    print("isOpenはfalseでcalculatedはfalse")
-                    print("processPrevは\(processPrevNumber)")
-                    print("processInputは\(processInputNumber)")
-                    print("processTotalは\(processTotalNumber)")
                 } else {
                     processNumber.text = processTotalNumber + processInputNumber
-                    print("isOpenはfalseでcalculatedはtrue")
-                    print("processPrevは\(processPrevNumber)")
-                    print("processInputは\(processInputNumber)")
-                    print("processTotalは\(processTotalNumber)")
                 }
             }
         }
@@ -84,21 +75,17 @@ class ViewController: UIViewController {
     
 
     @IBAction func popNumber (_ sender: UIButton) {
-        if isOpen == true {
-
-            prevNumber = String(prevNumber.dropLast())
-            displayNumber.text = prevNumber
-        } else {
-            inputNumber = String(inputNumber.dropLast())
-            displayNumber.text = inputNumber
-        }
+        let op = Calculations.popNumber(isOpen: isOpen, prevNumber: prevNumber, inputNumber: inputNumber)
+        prevNumber = op.prevNumber
+        inputNumber = op.inputNumber
+        displayNumber.text = op.displayNumber
     }
     
     @IBAction func calculation (_ sender: UIButton) {
         if isOpen == true {
             isOpen = false
             
-            if let op = Operation.init(rawValue: sender.tag) {
+            if let op = OperationType.init(rawValue: sender.tag) {
                 operation = op
                 
             }
@@ -130,10 +117,10 @@ class ViewController: UIViewController {
                 processNumber.text = processTotalNumber
             }
             
-            if let op = Operation.init(rawValue: sender.tag) {
+            if let op = OperationType.init(rawValue: sender.tag) {
                 operation = op
                 if let prev = Int(prevNumber), let input = Int(inputNumber) {
-                    resultNumber = op.calc(m: prev, n: input)
+                    resultNumber = op.calculate(m: prev, n: input)
                     process()
                 }
                 
@@ -146,8 +133,8 @@ class ViewController: UIViewController {
     @IBAction func showResult (_ sender: Any) {
         if let prev = Int(prevNumber), let input = Int(inputNumber) {
             
-            if let op = Operation.init(rawValue: operation.rawValue) {
-                resultNumber = op.calc(m: prev, n: input)
+            if let op = OperationType.init(rawValue: operation.rawValue) {
+                resultNumber = op.calculate(m: prev, n: input)
                 process()
             }
             

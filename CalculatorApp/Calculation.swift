@@ -1,5 +1,5 @@
 //
-//  calculation.swift
+//  Calculation.swift
 //  CalculatorApp_2
 //
 //  Created by 飯田諒 on 2019/05/08.
@@ -8,13 +8,13 @@
 
 import Foundation
 
-enum Operation: Int {
+enum OperationType: Int {
     case add = 10
     case minus = 11
     case multiply = 12
     case devide = 13
     
-    func calc(m:Int, n:Int) -> Int {
+    func calculate(m:Int, n:Int) -> Int {
         switch self {
         case .add:
             return m+n
