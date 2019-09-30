@@ -1,0 +1,4 @@
+ignore:
+  - "*Tests"
+  - "**/AppDelegate.swift"
+  - "**/*ViewController.swift"
