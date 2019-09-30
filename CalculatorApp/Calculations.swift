@@ -32,7 +32,13 @@ struct Calculations {
     
     static func judgeAvailabilityToAppend(senderTag: Int,
                                           prevNumber: String) -> Bool {
-        return senderTag > 0 && prevNumber.count > 0
+        if senderTag > 0 {
+            return true
+        } else if senderTag == 0 && prevNumber.count > 0 {
+            return true
+        } else {
+            return false
+        }
     }
     
     static func addNumber(senderTag: Int,

@@ -22,8 +22,21 @@ enum OperationType: Int {
             return m - n
         case .multiply:
             return m * n
-        @unknown default:
-            fatalError()
+        case .devide:
+            return m / n
+        }
+    }
+    
+    func calculationMark() -> String {
+        switch self {
+        case .add:
+            return "+"
+        case .minus:
+            return "-"
+        case .multiply:
+            return "×"
+        case .devide:
+            return "÷"
         }
     }
     

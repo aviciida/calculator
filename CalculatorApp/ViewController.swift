@@ -12,6 +12,10 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var processNumber: UILabel!
     @IBOutlet weak var displayNumber: UILabel!
+    
+    var viewModel: CalculatorViewModel = CalculatorViewModel()
+    
+    // TODO: ViewModelに移行後はすべて消す。
     var processPrevNumber: String = ""
     var processInputNumber: String = ""
     var processTotalNumber: String = ""
@@ -43,6 +47,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         displayNumber.text = "0"
+        
+        viewModel.processNumberHandler = {[weak self] newProcessNumber in
+            self?.processNumber.text = newProcessNumber
+        }
+        
+        viewModel.displayNumberHandler = { [weak self] newDisplayNumber in
+            self?.displayNumber.text = newDisplayNumber
+        }
         
         
         // Do any additional setup after loading the view.

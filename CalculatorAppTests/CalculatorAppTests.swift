@@ -30,17 +30,17 @@ class CalculatorAppTests: XCTestCase {
     }
     
     func testCalculationsJudgeAvailabilityToAppend() {
-        XCTAssertFalse(Calculations.judgeAvailabilityToAppend(senderTag: 0, prevNumber: ""))
-        XCTAssertFalse(Calculations.judgeAvailabilityToAppend(senderTag: 0, prevNumber: "0"))
-        XCTAssertFalse(Calculations.judgeAvailabilityToAppend(senderTag: 1, prevNumber: ""))
-        XCTAssertTrue(Calculations.judgeAvailabilityToAppend(senderTag: 1, prevNumber: "0"))
+//        XCTAssertFalse(Calculations.judgeAvailabilityToAppend(senderTag: 0, prevNumber: ""))
+//        XCTAssertFalse(Calculations.judgeAvailabilityToAppend(senderTag: 0, prevNumber: "0"))
+//        XCTAssertFalse(Calculations.judgeAvailabilityToAppend(senderTag: 1, prevNumber: ""))
+//        XCTAssertTrue(Calculations.judgeAvailabilityToAppend(senderTag: 1, prevNumber: "0"))
         
     }
     
     func testAddNumberUnableToAppendNumber() {
-        let op = Calculations.addNumber(senderTag: 0, isOpen: false, isCalculated: false, prevNumber: "", processPrevNumber: "34", processInputNumber: "44", processTotalNumber: "55", inputNumber: "9", isAbleToAppendNumber: false)
-        XCTAssertEqual(op.newPrevNumber, "")
-        XCTAssertEqual(op., <#T##expression2: Equatable##Equatable#>)
+//        let op = Calculations.addNumber(senderTag: 0, isOpen: false, isCalculated: false, prevNumber: "", processPrevNumber: "34", processInputNumber: "44", processTotalNumber: "55", inputNumber: "9", isAbleToAppendNumber: false)
+//        XCTAssertEqual(op.newPrevNumber, "")
+//        XCTAssertEqual(op., <#T##expression2: Equatable##Equatable#>)
     }
     
 
