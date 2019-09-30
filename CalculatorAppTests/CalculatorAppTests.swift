@@ -15,18 +15,18 @@ class CalculatorAppTests: XCTestCase {
         let op = Calculations.popNumber(isOpen: true,
                                         prevNumber: "234",
                                         inputNumber: "55")
-        XCTAssertEqual(op.displayNumber, "23")
-        XCTAssertEqual(op.inputNumber, "55")
-        XCTAssertEqual(op.prevNumber, "23")
+        XCTAssertEqual(op.displayNumber, "234")
+        XCTAssertEqual(op.inputNumber, "5")
+        XCTAssertEqual(op.prevNumber, "234")
     }
     
     func testCalculationsPopNumberNotOpen() {
         let op = Calculations.popNumber(isOpen: false,
-                                        prevNumber: "234",
+                                        prevNumber: "",
                                         inputNumber: "55")
         XCTAssertEqual(op.displayNumber, "5")
         XCTAssertEqual(op.inputNumber, "5")
-        XCTAssertEqual(op.prevNumber, "234")
+        XCTAssertEqual(op.prevNumber, "")
     }
-
+    
 }
