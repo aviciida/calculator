@@ -30,6 +30,11 @@ struct Calculations {
             return (newPrevNumber, newInputNumber, newDisplayNumber)
     }
     
+    static func judgeAvailabilityToAppend(senderTag: Int,
+                                          prevNumber: String) -> Bool {
+        return senderTag > 0 && prevNumber.count > 0
+    }
+    
     static func addNumber(senderTag: Int,
                           isOpen: Bool,
                           isCalculated: Bool,
@@ -37,7 +42,8 @@ struct Calculations {
                           processPrevNumber: String,
                           processInputNumber: String,
                           processTotalNumber: String,
-                          inputNumber: String)
+                          inputNumber: String,
+                          isAbleToAppendNumber: Bool)
         ->
         (newPrevNumber: String,
         newDisplayNumber: String,
@@ -52,7 +58,6 @@ struct Calculations {
             let newProcessInputNumber: String
             let newInputNumber: String
             let newProcessNumber: String
-            let isAbleToAppendNumber: Bool = senderTag > 0 && prevNumber.count > 0
             if !isAbleToAppendNumber {
                 newPrevNumber = prevNumber
                 newDisplayNumber = "0"

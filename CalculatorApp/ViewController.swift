@@ -49,6 +49,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func addNumber (_ sender: UIButton) {
+        let isAbleToAppendNumber: Bool = Calculations.judgeAvailabilityToAppend(senderTag: sender.tag, prevNumber: prevNumber)
         let op = Calculations.addNumber(senderTag: sender.tag,
                                         isOpen: isOpen,
                                         isCalculated: isCalculated,
@@ -56,7 +57,8 @@ class ViewController: UIViewController {
                                         processPrevNumber: processPrevNumber,
                                         processInputNumber: processInputNumber,
                                         processTotalNumber: processTotalNumber,
-                                        inputNumber: inputNumber)
+                                        inputNumber: inputNumber,
+                                        isAbleToAppendNumber: isAbleToAppendNumber)
         displayNumber.text = op.newDisplayNumber
         prevNumber = op.newPrevNumber
         processPrevNumber = op.newProcessPrevNumber
