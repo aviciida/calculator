@@ -12,16 +12,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var processNumber: UILabel!
     @IBOutlet weak var displayNumber: UILabel!
-    var processNumberLabelText: String = "" {
-        didSet {
-            processNumber.text = processNumberLabelText
-        }
-    }
-    var displayNumberLabelText: String = "" {
-        didSet {
-            displayNumber.text = displayNumberLabelText
-        }
-    }
+    
+    var viewModel: CalculatorViewModel = CalculatorViewModel()
 
     var processPrevNumber: String = ""
     var processInputNumber: String = ""
@@ -53,7 +45,15 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        displayNumberLabelText = "0"
+        viewModel.displayNumberLabelTextHandler = { [weak self] newDisplayNumberLabelText in
+            self?.displayNumber.text = newDisplayNumberLabelText
+        }
+
+        viewModel.processNumberLabelTextHandler = { [weak self] newProcessNumberLabelText in
+            self?.processNumber.text = newProcessNumberLabelText
+        }
+
+        viewModel.displayNumberLabelText = "0"
         
         
         // Do any additional setup after loading the view.
@@ -64,21 +64,21 @@ class ViewController: UIViewController {
             if sender.tag == 0 && prevNumber.count == 0 {
             } else {
                 prevNumber += String(sender.tag)
-                displayNumberLabelText = prevNumber
+                viewModel.displayNumberLabelText = prevNumber
                 processPrevNumber = prevNumber
-                processNumberLabelText = processPrevNumber
+                viewModel.processNumberLabelText = processPrevNumber
             }
         } else {
             if sender.tag == 0 && inputNumber.count == 0 {
             } else {
                 inputNumber += String(sender.tag)
-                displayNumberLabelText = inputNumber
+                viewModel.displayNumberLabelText = inputNumber
                 processInputNumber = inputNumber
                 
                 if isCalculated == false {
-                processNumberLabelText = processPrevNumber + processInputNumber
+                viewModel.processNumberLabelText = processPrevNumber + processInputNumber
                 } else {
-                    processNumberLabelText = processTotalNumber + processInputNumber
+                    viewModel.processNumberLabelText = processTotalNumber + processInputNumber
                 }
             }
         }
@@ -89,7 +89,7 @@ class ViewController: UIViewController {
         let op = Calculations.popNumber(isOpen: isOpen, prevNumber: prevNumber, inputNumber: inputNumber)
         prevNumber = op.prevNumber
         inputNumber = op.inputNumber
-        displayNumberLabelText = op.displayNumber
+        viewModel.displayNumberLabelText = op.displayNumber
     }
     
     @IBAction func calculation (_ sender: UIButton) {
@@ -102,30 +102,30 @@ class ViewController: UIViewController {
             }
             if sender.tag == 10 {
                 processPrevNumber += "+"
-                processNumberLabelText = processPrevNumber
+                viewModel.processNumberLabelText = processPrevNumber
             } else if sender.tag == 11 {
                 processPrevNumber += "-"
-                processNumberLabelText = processPrevNumber
+                viewModel.processNumberLabelText = processPrevNumber
             } else if sender.tag == 12 {
                 processPrevNumber += "×"
-                processNumberLabelText = processPrevNumber
+                viewModel.processNumberLabelText = processPrevNumber
             } else if sender.tag == 13 {
                 processPrevNumber += "÷"
-                processNumberLabelText = processPrevNumber
+                viewModel.processNumberLabelText = processPrevNumber
             }
         } else {
             if sender.tag == 10 {
                 processTotalNumber += "+"
-                processNumberLabelText = processTotalNumber
+                viewModel.processNumberLabelText = processTotalNumber
             } else if sender.tag == 11 {
                 processTotalNumber += "-"
-                processNumberLabelText = processTotalNumber
+                viewModel.processNumberLabelText = processTotalNumber
             } else if sender.tag == 12 {
                 processTotalNumber += "×"
-                processNumberLabelText = processTotalNumber
+                viewModel.processNumberLabelText = processTotalNumber
             } else if sender.tag == 13 {
                 processTotalNumber += "÷"
-                processNumberLabelText = processTotalNumber
+                viewModel.processNumberLabelText = processTotalNumber
             }
             
             if let op = OperationType.init(rawValue: sender.tag) {
@@ -160,14 +160,14 @@ class ViewController: UIViewController {
         prevNumber = ""
         inputNumber = ""
         isOpen = true
-        displayNumberLabelText = "0"
+        viewModel.displayNumberLabelText = "0"
     }
     func process() {
-        displayNumberLabelText = String(resultNumber)
+        viewModel.displayNumberLabelText = String(resultNumber)
         prevNumber = String(resultNumber)
         inputNumber = ""
         processTotalNumber = processPrevNumber + processInputNumber //ここがなんかおかしい
-        processNumberLabelText = processTotalNumber
+        viewModel.processNumberLabelText = processTotalNumber
         processPrevNumber = ""
         processInputNumber = ""
         isCalculated = true
