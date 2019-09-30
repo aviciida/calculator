@@ -22,8 +22,8 @@ enum OperationType: Int {
             return m - n
         case .multiply:
             return m * n
-        case .devide:
-            return m / n
+        @unknown default:
+            fatalError()
         }
     }
     
