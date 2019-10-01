@@ -10,6 +10,25 @@ import XCTest
 @testable import CalculatorApp
 
 class CalculatorAppViewModelTests: XCTestCase {
+    
+    func testViewModelJudgeAbilityToAppendNumbers() {
+        let viewModel = CalculatorViewModel()
+        viewModel.prevNumber = ""
+        viewModel.judgeAbilityToAppendNumbers(senderTag: 0)
+        XCTAssertEqual(viewModel.isAbleToAppendNumbers, false)
+        
+        viewModel.prevNumber = "1"
+        viewModel.judgeAbilityToAppendNumbers(senderTag: 0)
+        XCTAssertEqual(viewModel.isAbleToAppendNumbers, true)
+        
+        viewModel.prevNumber = ""
+        viewModel.judgeAbilityToAppendNumbers(senderTag: 1)
+        XCTAssertEqual(viewModel.isAbleToAppendNumbers, true)
+        
+        viewModel.prevNumber = "1"
+        viewModel.judgeAbilityToAppendNumbers(senderTag: 1)
+        XCTAssertEqual(viewModel.isAbleToAppendNumbers, true)
+    }
 
     func testViewModelPopNumberOpen() {
         let viewModel = CalculatorViewModel()
@@ -34,5 +53,7 @@ class CalculatorAppViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.inputNumber, "56")
         
     }
+    
+    
 
 }

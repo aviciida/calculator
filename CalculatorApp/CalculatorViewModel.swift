@@ -32,6 +32,10 @@ class CalculatorViewModel {
     var isOpen: Bool = true
     var isCalculated: Bool = false
     var operation: OperationType = .add
+//    var checkAbilityToAppendNumbers: ((Int, String) -> Bool) = { senderTag, prevNumber in
+//        return senderTag > 0 || senderTag == 0 && prevNumber.count > 0
+//    }
+    var isAbleToAppendNumbers = false
     
     func popNumber() {
         let newPrevNumber: String
@@ -51,8 +55,11 @@ class CalculatorViewModel {
         displayNumberLabelText = newDisplayNumber
     }
     
+    func judgeAbilityToAppendNumbers(senderTag: Int) {
+        isAbleToAppendNumbers = senderTag > 0 || senderTag == 0 && prevNumber.count > 0
+    }
+    
     func appendNumber(senderTag: Int) {
-        let isAbleToAppendNumbers = senderTag > 0 || senderTag == 0 && prevNumber.count > 0
         let newPrevNumber: String
         let newDisplayNumber: String
         let newProcessPrevNumber: String
