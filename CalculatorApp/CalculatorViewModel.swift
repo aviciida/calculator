@@ -121,12 +121,35 @@ class CalculatorViewModel {
         } else {
             processTotalNumber += calculationMark
             processNumberLabelText = processTotalNumber
-            if let prev = Int(prevNumber), let input = Int(inputNumber) {
-                resultNumber = operation.calculate(m: prev, n: input)
-//                process()
-            }
+            showResult()
         }
     }
+    
+    func process() {
+        displayNumberLabelText = String(resultNumber)
+        prevNumber = String(resultNumber)
+        inputNumber = ""
+        processTotalNumber = processPrevNumber + processInputNumber
+        processNumberLabelText = processTotalNumber
+        processPrevNumber = ""
+        processInputNumber = ""
+    }
+    
+    func clear() {
+        prevNumber = ""
+        inputNumber = ""
+        isOpen = true
+        displayNumberLabelText = "0"
+        processNumberLabelText = "0"
+    }
+    
+    func showResult() {
+        if let prev = Int(prevNumber), let input = Int(inputNumber) {
+            resultNumber = operation.calculate(m: prev, n: input)
+            process()
+        }
+    }
+    
     
     
 }
