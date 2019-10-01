@@ -1,5 +1,5 @@
 //
-//  Calculation.swift
+//  OperationType.swift
 //  CalculatorApp_2
 //
 //  Created by 飯田諒 on 2019/05/08.
