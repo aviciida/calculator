@@ -1,5 +1,5 @@
 //
-//  Calculation.swift
+//  OperationType.swift
 //  CalculatorApp_2
 //
 //  Created by 飯田諒 on 2019/05/08.
@@ -24,6 +24,19 @@ enum OperationType: Int {
             return m * n
         case .devide:
             return m / n
+        }
+    }
+    
+    func calculationMark() -> String {
+        switch self {
+        case .add:
+            return "+"
+        case .minus:
+            return "-"
+        case .multiply:
+            return "×"
+        case .devide:
+            return "÷"
         }
     }
     
