@@ -104,5 +104,29 @@ class CalculatorAppViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.inputNumber, "239")
         XCTAssertEqual(viewModel.processInputNumber, "239")
     }
+    
+    func testViewModelCalculationNotUnderCalculation() {
+        let viewModel = CalculatorViewModel()
+        viewModel.isUnderCalculation = false
+        viewModel.prevNumber = "38"
+        viewModel.processPrevNumber = "38"
+        
+        viewModel.calculation(senderTag: 12)
+        XCTAssertEqual(viewModel.processPrevNumber, "38×")
+        XCTAssertEqual(viewModel.processNumberLabelText, "38×")
+    }
+    
+    func testViewModelCalculationUnderCalculation() {
+        let viewModel = CalculatorViewModel()
+        viewModel.isUnderCalculation = true
+        viewModel.prevNumber = "38"
+        viewModel.processPrevNumber = "38"
+        viewModel.inputNumber = "91"
+        viewModel.processInputNumber = "91"
+        
+        viewModel.calculation(senderTag: 12)
+        XCTAssertEqual(viewModel.processPrevNumber, "")
+    }
+    
 
 }

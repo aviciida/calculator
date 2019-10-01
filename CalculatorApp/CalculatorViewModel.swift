@@ -117,7 +117,7 @@ class CalculatorViewModel {
             processPrevNumber += calculationMark
             processNumberLabelText = processPrevNumber
         } else {
-            processTotalNumber += calculationMark
+            processPrevNumber += processInputNumber + calculationMark
             processNumberLabelText = processTotalNumber
             showResult()
         }
