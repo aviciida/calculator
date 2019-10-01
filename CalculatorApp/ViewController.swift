@@ -15,17 +15,6 @@ class ViewController: UIViewController {
     
     var viewModel: CalculatorViewModel = CalculatorViewModel()
     
-    // TODO: ViewModelに移行後はすべて消す。
-    var processPrevNumber: String = ""
-    var processInputNumber: String = ""
-    var processTotalNumber: String = ""
-    var prevNumber: String = ""
-    var inputNumber: String = ""
-    var resultNumber: Int = 0
-    var isOpen: Bool = true
-    var isCalculated: Bool = false
-    var operation: OperationType = .add
-    
     @IBOutlet weak var one: UIButton!
     @IBOutlet weak var two: UIButton!
     @IBOutlet weak var three: UIButton!
@@ -61,111 +50,28 @@ class ViewController: UIViewController {
     }
     
     @IBAction func addNumber (_ sender: UIButton) {
-        let isAbleToAppendNumber: Bool = Calculations.judgeAvailabilityToAppend(senderTag: sender.tag, prevNumber: prevNumber)
-        let op = Calculations.addNumber(senderTag: sender.tag,
-                                        isOpen: isOpen,
-                                        isCalculated: isCalculated,
-                                        prevNumber: prevNumber,
-                                        processPrevNumber: processPrevNumber,
-                                        processInputNumber: processInputNumber,
-                                        processTotalNumber: processTotalNumber,
-                                        inputNumber: inputNumber,
-                                        isAbleToAppendNumber: isAbleToAppendNumber)
-        displayNumber.text = op.newDisplayNumber
-        prevNumber = op.newPrevNumber
-        processPrevNumber = op.newProcessPrevNumber
-        processNumber.text = op.newProcessNumber
-        inputNumber = op.newInputNumber
-        processInputNumber = op.newProcessInputNumber
+        viewModel.appendNumber(senderTag: sender.tag)
     }
     
 
     @IBAction func popNumber (_ sender: UIButton) {
-        let op = Calculations.popNumber(isOpen: isOpen, prevNumber: prevNumber, inputNumber: inputNumber)
-        prevNumber = op.prevNumber
-        inputNumber = op.inputNumber
-        displayNumber.text = op.displayNumber
+        viewModel.popNumber()
     }
     
     @IBAction func calculation (_ sender: UIButton) {
-        if isOpen == true {
-            isOpen = false
-            
-            if let op = OperationType.init(rawValue: sender.tag) {
-                operation = op
-                
-            }
-            if sender.tag == 10 {
-                processPrevNumber += "+"
-                processNumber.text = processPrevNumber
-            } else if sender.tag == 11 {
-                processPrevNumber += "-"
-                processNumber.text = processPrevNumber
-            } else if sender.tag == 12 {
-                processPrevNumber += "×"
-                processNumber.text = processPrevNumber
-            } else if sender.tag == 13 {
-                processPrevNumber += "÷"
-                processNumber.text = processPrevNumber
-            }
-        } else {
-            if sender.tag == 10 {
-                processTotalNumber += "+"
-                processNumber.text = processTotalNumber
-            } else if sender.tag == 11 {
-                processTotalNumber += "-"
-                processNumber.text = processTotalNumber
-            } else if sender.tag == 12 {
-                processTotalNumber += "×"
-                processNumber.text = processTotalNumber
-            } else if sender.tag == 13 {
-                processTotalNumber += "÷"
-                processNumber.text = processTotalNumber
-            }
-            
-            if let op = OperationType.init(rawValue: sender.tag) {
-                operation = op
-                if let prev = Int(prevNumber), let input = Int(inputNumber) {
-                    resultNumber = op.calculate(m: prev, n: input)
-                    process()
-                }
-                
-            }
-            
-            
-        }
+        viewModel.calculation(senderTag: sender.tag)
     }
 
     @IBAction func showResult (_ sender: Any) {
-        if let prev = Int(prevNumber), let input = Int(inputNumber) {
-            
-            if let op = OperationType.init(rawValue: operation.rawValue) {
-                resultNumber = op.calculate(m: prev, n: input)
-                process()
-            }
-            
-        }
+        viewModel.showResult()
     }
     
     @IBAction func clearAll (_ sender: Any) {
-        clear()
+        viewModel.clear()
     }
 
-    func clear() {
-        prevNumber = ""
-        inputNumber = ""
-        isOpen = true
-        displayNumber.text = "0"
-    }
     func process() {
-        displayNumber.text = String(resultNumber)
-        prevNumber = String(resultNumber)
-        inputNumber = ""
-        processTotalNumber = processPrevNumber + processInputNumber //ここがなんかおかしい
-        processNumber.text = processTotalNumber
-        processPrevNumber = ""
-        processInputNumber = ""
-        isCalculated = true
+        viewModel.process()
     }
     
     

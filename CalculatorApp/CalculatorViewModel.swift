@@ -32,15 +32,6 @@ class CalculatorViewModel {
     var isOpen: Bool = true
     var isCalculated: Bool = false
     var operation: OperationType = .add
-//    var isAbleToAppendNumbers:((Int, String) -> Bool) = { senderTag, prevNumberText in
-//        if senderTag > 0 {
-//            return true
-//        } else if senderTag == 0 && prevNumberText.count > 0 {
-//            return true
-//        } else {
-//            return false
-//        }
-//    }
     
     func popNumber() {
         let newPrevNumber: String
