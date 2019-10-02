@@ -113,8 +113,8 @@ class CalculatorViewModel {
     }
     
     func calculation(senderTag: Int) {
-        guard let op = OperationType.init(rawValue: senderTag) else { return }
-        operation = op
+        guard let result = OperationType.init(rawValue: senderTag) else { return }
+        operation = result
         let calculationMark = operation.calculationMark()
         
         if !isUnderCalculation {
