@@ -97,7 +97,7 @@ class CalculatorAppViewModelTests: XCTestCase {
         viewModel.processTotalNumber = "899"
         
         viewModel.appendNumber(senderTag: 9)
-        XCTAssertEqual(viewModel.displayNumberLabelText, "239", "inputNumberにsenderTagが足される")
+        XCTAssertEqual(viewModel.displayNumberLabelText, "239")
         XCTAssertEqual(viewModel.prevNumber, "899")
         XCTAssertEqual(viewModel.processPrevNumber, "899")
         XCTAssertEqual(viewModel.processNumberLabelText, "899239")
