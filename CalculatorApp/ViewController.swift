@@ -34,9 +34,7 @@ class ViewController: UIViewController {
     
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        displayNumber.text = "0"
-        
+        super.viewDidLoad()        
         viewModel.processNumberHandler = {[weak self] newProcessNumber in
             self?.processNumber.text = newProcessNumber
         }

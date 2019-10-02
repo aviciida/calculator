@@ -127,6 +127,35 @@ class CalculatorAppViewModelTests: XCTestCase {
         viewModel.calculation(senderTag: 12)
         XCTAssertEqual(viewModel.processPrevNumber, "")
     }
+
+    func testInitialLabelTextValue() {
+        let viewModel = CalculatorViewModel()
+        var value: String? = nil
+        viewModel.displayNumberHandler = { newValue in
+            value = newValue
+        }
+        XCTAssertEqual(value, "0")
+        
+        viewModel.displayNumberLabelText = "15"
+        var value1: String? = nil
+        viewModel.displayNumberHandler = { newValue in
+            value1 = newValue
+        }
+        XCTAssertEqual(value1, "15")
+        
+        var value2: String? = nil
+        viewModel.processNumberHandler = { newValue in
+            value2 = newValue
+        }
+        XCTAssertEqual(value2, "0")
+        
+        viewModel.processNumberLabelText = "21"
+        var value3 : String? = nil
+        viewModel.processNumberHandler = { newValue in
+            value3 = newValue
+        }
+        XCTAssertEqual(value3, "21")
+    }
     
 
 }

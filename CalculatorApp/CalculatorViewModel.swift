@@ -9,19 +9,27 @@
 import Foundation
 
 class CalculatorViewModel {
-    var processNumberLabelText = "" {
+    var processNumberLabelText = "0" {
         didSet {
             processNumberHandler?(processNumberLabelText)
         }
     }
-    var displayNumberLabelText = "" {
+    var displayNumberLabelText = "0" {
         didSet {
             displayNumberHandler?(displayNumberLabelText)
         }
     }
     
-    var processNumberHandler: ((String) -> Void)? = nil
-    var displayNumberHandler: ((String) -> Void)? = nil
+    var processNumberHandler: ((String) -> Void)? = nil {
+        didSet {
+            processNumberHandler?(processNumberLabelText)
+        }
+    }
+    var displayNumberHandler: ((String) -> Void)? = nil {
+        didSet {
+            displayNumberHandler?(displayNumberLabelText)
+        }
+    }
     
     var processPrevNumber: String = ""
     var processInputNumber: String = ""
@@ -31,9 +39,6 @@ class CalculatorViewModel {
     var resultNumber: Int = 0
     var isUnderCalculation: Bool = false
     var operation: OperationType = .add
-//    var checkAbilityToAppendNumbers: ((Int, String) -> Bool) = { senderTag, prevNumber in
-//        return senderTag > 0 || senderTag == 0 && prevNumber.count > 0
-//    }
     var isAbleToAppendNumbers = false
     
     func popNumber() {
