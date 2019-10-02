@@ -9,19 +9,27 @@
 import Foundation
 
 class CalculatorViewModel {
-    var processNumberLabelText = "" {
+    var processNumberLabelText = "0" {
         didSet {
             processNumberHandler?(processNumberLabelText)
         }
     }
-    var displayNumberLabelText = "" {
+    var displayNumberLabelText = "0" {
         didSet {
             displayNumberHandler?(displayNumberLabelText)
         }
     }
     
-    var processNumberHandler: ((String) -> Void)? = nil
-    var displayNumberHandler: ((String) -> Void)? = nil
+    var processNumberHandler: ((String) -> Void)? = nil {
+        didSet {
+            processNumberHandler?(processNumberLabelText)
+        }
+    }
+    var displayNumberHandler: ((String) -> Void)? = nil {
+        didSet {
+            displayNumberHandler?(displayNumberLabelText)
+        }
+    }
     
     var processPrevNumber: String = ""
     var processInputNumber: String = ""
@@ -31,31 +39,41 @@ class CalculatorViewModel {
     var resultNumber: Int = 0
     var isUnderCalculation: Bool = false
     var operation: OperationType = .add
-//    var checkAbilityToAppendNumbers: ((Int, String) -> Bool) = { senderTag, prevNumber in
-//        return senderTag > 0 || senderTag == 0 && prevNumber.count > 0
-//    }
     var isAbleToAppendNumbers = false
     
     func popNumber() {
         let newPrevNumber: String
         let newInputNumber: String
         let newDisplayNumber: String
+        let newProcessPrevNumber: String
+        let newProcessInputNumber: String
         if !isUnderCalculation {
             newPrevNumber = String(prevNumber.dropLast())
+            newProcessPrevNumber = String(processPrevNumber.dropLast())
             newDisplayNumber = newPrevNumber
             newInputNumber = inputNumber
+            newProcessInputNumber = processInputNumber
         } else {
             newInputNumber = String(inputNumber.dropLast())
+            newProcessPrevNumber = processPrevNumber
             newDisplayNumber = newInputNumber
             newPrevNumber = prevNumber
+            newProcessInputNumber = String(processInputNumber.dropLast())
         }
         prevNumber = newPrevNumber
         inputNumber = newInputNumber
         displayNumberLabelText = newDisplayNumber
+        processPrevNumber = newProcessPrevNumber
+        processInputNumber = newProcessInputNumber
+        processNumberLabelText = processPrevNumber + processInputNumber
     }
     
     func judgeAbilityToAppendNumbers(senderTag: Int) {
-        isAbleToAppendNumbers = senderTag > 0 || senderTag == 0 && prevNumber.count > 0
+        if !isUnderCalculation {
+            isAbleToAppendNumbers = senderTag > 0 || senderTag == 0 && prevNumber.count > 0
+        } else {
+            isAbleToAppendNumbers = senderTag > 0 || senderTag == 0 && inputNumber.count > 0
+        }
     }
     
     func appendNumber(senderTag: Int) {
@@ -66,7 +84,7 @@ class CalculatorViewModel {
         let newProcessInputNumber: String
         let newInputNumber: String
         let newProcessNumber: String
-        if !isAbleToAppendNumbers {
+        if !isAbleToAppendNumbers && !isUnderCalculation {
             newPrevNumber = prevNumber
             newDisplayNumber = "0"
             newProcessPrevNumber = processPrevNumber
@@ -82,6 +100,8 @@ class CalculatorViewModel {
             processInputNumber = newProcessInputNumber
             
             return
+        } else if !isAbleToAppendNumbers && isUnderCalculation {
+            // TODO: Implement here.
         }
         
         if !isUnderCalculation {
@@ -107,9 +127,11 @@ class CalculatorViewModel {
         processInputNumber = newProcessInputNumber
     }
     
-    func calculation(senderTag: Int) {
-        guard let op = OperationType.init(rawValue: senderTag) else { return }
-        operation = op
+    func calculationDidTap(senderTag: Int) {
+        if isUnderCalculation { calculate() }
+        isAbleToAppendNumbers = false
+        guard let result = OperationType.init(rawValue: senderTag) else { return }
+        operation = result
         let calculationMark = operation.calculationMark()
         
         if !isUnderCalculation {
@@ -117,34 +139,37 @@ class CalculatorViewModel {
             processPrevNumber += calculationMark
             processNumberLabelText = processPrevNumber
         } else {
-            processPrevNumber += processInputNumber + calculationMark
-            processNumberLabelText = processTotalNumber
-            showResult()
+            processPrevNumber = processPrevNumber + processInputNumber + calculationMark
+            processInputNumber = ""
+            processNumberLabelText = processPrevNumber
+            displayNumberLabelText = String(resultNumber)
+            prevNumber = String(resultNumber)
+            inputNumber = ""
         }
     }
     
-    func process() {
+    func showResultDidTap() {
+        calculate()
+        processPrevNumber = processPrevNumber + processInputNumber
         displayNumberLabelText = String(resultNumber)
         prevNumber = String(resultNumber)
         inputNumber = ""
-        processTotalNumber = processPrevNumber + processInputNumber
-        processNumberLabelText = processTotalNumber
-        processPrevNumber = ""
+        processNumberLabelText = processPrevNumber
         processInputNumber = ""
     }
     
     func clear() {
         prevNumber = ""
         inputNumber = ""
+        resultNumber = 0
         isUnderCalculation = false
         displayNumberLabelText = "0"
         processNumberLabelText = "0"
     }
     
-    func showResult() {
+    func calculate() {
         if let prev = Int(prevNumber), let input = Int(inputNumber) {
             resultNumber = operation.calculate(m: prev, n: input)
-            process()
         }
     }
     
