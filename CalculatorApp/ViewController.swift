@@ -34,7 +34,7 @@ class ViewController: UIViewController {
     
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
         viewModel.processNumberHandler = {[weak self] newProcessNumber in
             self?.processNumber.text = newProcessNumber
         }
@@ -57,21 +57,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func calculation (_ sender: UIButton) {
-        viewModel.calculation(senderTag: sender.tag)
+        viewModel.calculationDidTap(senderTag: sender.tag)
     }
 
     @IBAction func showResult (_ sender: Any) {
-        viewModel.showResult()
+        viewModel.showResultDidTap()
     }
     
     @IBAction func clearAll (_ sender: Any) {
         viewModel.clear()
     }
-
-    func process() {
-        viewModel.process()
-    }
-    
     
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
