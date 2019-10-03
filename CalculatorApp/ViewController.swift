@@ -43,7 +43,6 @@ class ViewController: UIViewController {
             self?.displayNumber.text = newDisplayNumber
         }
         
-        
         // Do any additional setup after loading the view.
     }
     
