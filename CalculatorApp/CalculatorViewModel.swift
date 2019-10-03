@@ -153,7 +153,12 @@ class CalculatorViewModel {
         }
     }
     
+    @available(*, deprecated, renamed: "didTapShowResult")
     func showResultDidTap() {
+        didTapShowResult()
+    }
+    
+    func didTapShowResult() {
         calculate()
         processPrevNumber = processPrevNumber + processInputNumber
         displayNumberLabelText = String(resultNumber)
