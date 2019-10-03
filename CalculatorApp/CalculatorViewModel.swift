@@ -42,29 +42,15 @@ class CalculatorViewModel {
     var isAbleToAppendNumbers = false
     
     func popNumber() {
-        let newPrevNumber: String
-        let newInputNumber: String
-        let newDisplayNumber: String
-        let newProcessPrevNumber: String
-        let newProcessInputNumber: String
         if !isUnderCalculation {
-            newPrevNumber = String(prevNumber.dropLast())
-            newProcessPrevNumber = String(processPrevNumber.dropLast())
-            newDisplayNumber = newPrevNumber
-            newInputNumber = inputNumber
-            newProcessInputNumber = processInputNumber
+            prevNumber = String(prevNumber.dropLast())
+            processPrevNumber = String(processPrevNumber.dropLast())
+            displayNumberLabelText = prevNumber
         } else {
-            newInputNumber = String(inputNumber.dropLast())
-            newProcessPrevNumber = processPrevNumber
-            newDisplayNumber = newInputNumber
-            newPrevNumber = prevNumber
-            newProcessInputNumber = String(processInputNumber.dropLast())
+            inputNumber = String(inputNumber.dropLast())
+            displayNumberLabelText = inputNumber
+            processInputNumber = String(processInputNumber.dropLast())
         }
-        prevNumber = newPrevNumber
-        inputNumber = newInputNumber
-        displayNumberLabelText = newDisplayNumber
-        processPrevNumber = newProcessPrevNumber
-        processInputNumber = newProcessInputNumber
         processNumberLabelText = processPrevNumber + processInputNumber
     }
     
