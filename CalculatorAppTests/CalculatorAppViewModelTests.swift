@@ -13,9 +13,10 @@ class CalculatorAppViewModelTests: XCTestCase {
     
     func testViewModelJudgeAbilityToAppendNumbersNotUnderCalculation() {
         let viewModel = CalculatorViewModel()
+        viewModel.isUnderCalculation = false
         viewModel.prevNumber = ""
         viewModel.judgeAbilityToAppendNumbers(senderTag: 0)
-        XCTAssertEqual(viewModel.isAbleToAppendNumbers, false)
+        XCTAssertEqual(viewModel.isAbleToAppendNumbers, true)
         
         viewModel.prevNumber = "1"
         viewModel.judgeAbilityToAppendNumbers(senderTag: 0)
@@ -83,20 +84,47 @@ class CalculatorAppViewModelTests: XCTestCase {
         
     }
     
-    func testViewModelAppendNumbersUnable() {
+    func testViewModelAppendNumbersUnableAndNotUnderCalculation() {
         let viewModel = CalculatorViewModel()
         viewModel.isAbleToAppendNumbers = false
-        viewModel.processPrevNumber = "10"
-        viewModel.processInputNumber = "23"
-        viewModel.inputNumber = "74"
+        viewModel.isUnderCalculation = false
         
+        viewModel.processPrevNumber = ""
+        viewModel.prevNumber = ""
         viewModel.appendNumber(senderTag: 0)
         XCTAssertEqual(viewModel.displayNumberLabelText, "0")
         XCTAssertEqual(viewModel.processPrevNumber, "10")
         XCTAssertEqual(viewModel.processNumberLabelText, "0")
-        XCTAssertEqual(viewModel.inputNumber, "74")
-        XCTAssertEqual(viewModel.processInputNumber, "23")
+        XCTAssertEqual(viewModel.inputNumber, "")
+        XCTAssertEqual(viewModel.processInputNumber, "")
         
+        viewModel.processPrevNumber = "0"
+        viewModel.prevNumber = "0"
+        viewModel.appendNumber(senderTag: 0)
+        XCTAssertEqual(viewModel.displayNumberLabelText, "0")
+        XCTAssertEqual(viewModel.processPrevNumber, "0")
+        XCTAssertEqual(viewModel.processNumberLabelText, "0")
+        XCTAssertEqual(viewModel.inputNumber, "")
+        XCTAssertEqual(viewModel.processInputNumber, "")
+        
+    }
+    
+    func testViewModelAppendNumbersUnableAndUnderCalculation() {
+        let viewModel = CalculatorViewModel()
+        viewModel.isAbleToAppendNumbers = false
+        viewModel.isUnderCalculation = true
+        
+        viewModel.processPrevNumber = "21+40-0"
+        viewModel.prevNumber = "61"
+        viewModel.inputNumber = "0"
+        viewModel.processInputNumber = "0"
+        XCTAssertEqual(viewModel.displayNumberLabelText, "0")
+        viewModel.appendNumber(senderTag: 0)
+        XCTAssertEqual(viewModel.displayNumberLabelText, "0")
+        XCTAssertEqual(viewModel.processPrevNumber, "21+40-0")
+        XCTAssertEqual(viewModel.processNumberLabelText, "21+40-")
+        XCTAssertEqual(viewModel.inputNumber, "0")
+        XCTAssertEqual(viewModel.processInputNumber, "0")
     }
     
     func testViewModelAppendNumbersNotUnderCalculation() {
@@ -113,6 +141,14 @@ class CalculatorAppViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.processNumberLabelText, "899")
         XCTAssertEqual(viewModel.inputNumber, "")
         XCTAssertEqual(viewModel.processInputNumber, "")
+        
+        viewModel.prevNumber = "0"
+        viewModel.processPrevNumber = "0"
+        viewModel.appendNumber(senderTag: 9)
+        XCTAssertEqual(viewModel.prevNumber, "9")
+        XCTAssertEqual(viewModel.processPrevNumber, "9")
+        XCTAssertEqual(viewModel.displayNumberLabelText, "9")
+        XCTAssertEqual(viewModel.processNumberLabelText, "9")
     }
     
     func testViewModelAppendNumbersUnderCalculation() {

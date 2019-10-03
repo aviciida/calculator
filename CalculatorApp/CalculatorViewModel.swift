@@ -69,11 +69,18 @@ class CalculatorViewModel {
     }
     
     func judgeAbilityToAppendNumbers(senderTag: Int) {
-        if !isUnderCalculation {
-            isAbleToAppendNumbers = senderTag > 0 || senderTag == 0 && prevNumber.count > 0
+        // もともと0を入れておいて、00になる場合はfalse、そうじゃなければtrueを返す感じで良さそう
+        // と思ったけど、そうすると他のところで0をの場合とそうでない場合を分けなきゃいけないので、そのやり方は微妙感があるな
+        if senderTag == 0 {
+            if !isUnderCalculation {
+                isAbleToAppendNumbers = prevNumber != ""
+            } else {
+                isAbleToAppendNumbers = inputNumber != ""
+            }
         } else {
-            isAbleToAppendNumbers = senderTag > 0 || senderTag == 0 && inputNumber.count > 0
+            isAbleToAppendNumbers = true
         }
+
     }
     
     func appendNumber(senderTag: Int) {
@@ -112,12 +119,27 @@ class CalculatorViewModel {
             newInputNumber = inputNumber
             newProcessNumber = newProcessPrevNumber
         } else {
-            newInputNumber = inputNumber + String(senderTag)
-            newDisplayNumber = newInputNumber
-            newPrevNumber = prevNumber
-            newProcessInputNumber = newInputNumber
-            newProcessPrevNumber = processPrevNumber
-            newProcessNumber = newProcessPrevNumber + newProcessInputNumber
+            if !isUnderCalculation {
+                newPrevNumber = prevNumber == "0" ? String(senderTag) : (prevNumber + String(senderTag))
+                newDisplayNumber = newPrevNumber
+                newProcessPrevNumber = newPrevNumber
+                newProcessInputNumber = processInputNumber
+                newInputNumber = inputNumber
+                newProcessNumber = newProcessPrevNumber
+            } else {
+                newInputNumber = inputNumber + String(senderTag)
+                newDisplayNumber = newInputNumber
+                newPrevNumber = prevNumber
+                newProcessInputNumber = newInputNumber
+                newProcessPrevNumber = processPrevNumber
+                newProcessNumber = newProcessPrevNumber + newProcessInputNumber
+            }
+            displayNumberLabelText = newDisplayNumber
+            prevNumber = newPrevNumber
+            processPrevNumber = newProcessPrevNumber
+            processNumberLabelText = newProcessNumber
+            inputNumber = newInputNumber
+            processInputNumber = newProcessInputNumber
         }
         displayNumberLabelText = newDisplayNumber
         prevNumber = newPrevNumber
