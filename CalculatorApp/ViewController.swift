@@ -61,7 +61,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func showResult (_ sender: Any) {
-        viewModel.showResultDidTap()
+        viewModel.didTapShowResult()
     }
     
     @IBAction func clearAll (_ sender: Any) {
