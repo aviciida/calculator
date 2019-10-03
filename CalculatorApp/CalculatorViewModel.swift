@@ -69,13 +69,19 @@ class CalculatorViewModel {
     }
     
     func judgeAbilityToAppendNumbers(senderTag: Int) {
-        if !isUnderCalculation {
-            isAbleToAppendNumbers = senderTag > 0 || senderTag == 0 && prevNumber.count > 0
-        } else if inputNumber == "" {
+        // もともと0を入れておいて、00になる場合はfalse、そうじゃなければtrueを返す感じで良さそう
+        // と思ったけど、そうすると他のところで0をの場合とそうでない場合を分けなきゃいけないので、そのやり方は微妙感があるな
+        if senderTag == 0 {
+            if !isUnderCalculation {
+                isAbleToAppendNumbers = prevNumber != ""
+            } else {
+                isAbleToAppendNumbers = inputNumber != ""
+            }
+        } else {
             isAbleToAppendNumbers = true
-        } else if inputNumber == "0" {
-            isAbleToAppendNumbers = false
+
         }
+
     }
     
     func appendNumber(senderTag: Int) {
@@ -96,11 +102,12 @@ class CalculatorViewModel {
                 newProcessNumber = String(senderTag)
 
             } else {
+                
                 newPrevNumber = prevNumber
                 newProcessPrevNumber = processPrevNumber
-                newProcessInputNumber = String(senderTag)
-                newInputNumber = String(senderTag)
-                newDisplayNumber = String(senderTag)
+                newProcessInputNumber = ""
+                newInputNumber = ""
+                newDisplayNumber = displayNumberLabelText
                 newProcessNumber = newProcessPrevNumber + newProcessInputNumber
 
             }
@@ -116,7 +123,7 @@ class CalculatorViewModel {
 
         } else {
             if !isUnderCalculation {
-                newPrevNumber = prevNumber + String(senderTag)
+                newPrevNumber = prevNumber == "0" ? String(senderTag) : (prevNumber + String(senderTag))
                 newDisplayNumber = newPrevNumber
                 newProcessPrevNumber = newPrevNumber
                 newProcessInputNumber = processInputNumber
@@ -178,6 +185,8 @@ class CalculatorViewModel {
         isUnderCalculation = false
         displayNumberLabelText = "0"
         processNumberLabelText = "0"
+        processInputNumber = ""
+        processPrevNumber = ""
     }
     
     func calculate() {
