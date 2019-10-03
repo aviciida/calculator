@@ -48,7 +48,7 @@ class CalculatorViewModel {
     var isAbleToAppendNumbers = false
     
     func popNumber() {
-        if !isUnderCalculation {
+        if !isCalculating {
             prevNumber = String(prevNumber.dropLast())
             processPrevNumber = String(processPrevNumber.dropLast())
             displayNumberLabelText = prevNumber
@@ -61,7 +61,7 @@ class CalculatorViewModel {
     }
     
     func judgeAbilityToAppendNumbers(senderTag: Int) {
-        if !isUnderCalculation {
+        if !isCalculating {
             isAbleToAppendNumbers = senderTag > 0 || senderTag == 0 && prevNumber.count > 0
         } else if inputNumber == "" {
             isAbleToAppendNumbers = true
@@ -79,7 +79,7 @@ class CalculatorViewModel {
         let newInputNumber: String
         let newProcessNumber: String
         if !isAbleToAppendNumbers {
-            if !isUnderCalculation {
+            if !isCalculating {
                 newPrevNumber = String(senderTag)
                 newDisplayNumber = String(senderTag)
                 newProcessPrevNumber = newPrevNumber
@@ -107,7 +107,7 @@ class CalculatorViewModel {
             return
 
         } else {
-            if !isUnderCalculation {
+            if !isCalculating {
                 newPrevNumber = prevNumber + String(senderTag)
                 newDisplayNumber = newPrevNumber
                 newProcessPrevNumber = newPrevNumber
@@ -133,14 +133,14 @@ class CalculatorViewModel {
     }
     
     func calculationDidTap(senderTag: Int) {
-        if isUnderCalculation { calculate() }
+        if isCalculating { calculate() }
         isAbleToAppendNumbers = false
         guard let result = OperationType.init(rawValue: senderTag) else { return }
         operation = result
         let calculationMark = operation.calculationMark()
         
-        if !isUnderCalculation {
-            isUnderCalculation = true
+        if !isCalculating {
+            isCalculating = true
             processPrevNumber += calculationMark
             processNumberLabelText = processPrevNumber
         } else {
@@ -167,7 +167,7 @@ class CalculatorViewModel {
         prevNumber = ""
         inputNumber = ""
         resultNumber = 0
-        isUnderCalculation = false
+        isCalculating = false
         displayNumberLabelText = "0"
         processNumberLabelText = "0"
     }
