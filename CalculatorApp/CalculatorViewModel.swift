@@ -72,63 +72,30 @@ class CalculatorViewModel {
     
     func appendNumber(senderTag: Int) {
         judgeAbilityToAppendNumbers(senderTag: senderTag)
-        let newPrevNumber: String
-        let newDisplayNumber: String
-        let newProcessPrevNumber: String
-        let newProcessInputNumber: String
-        let newInputNumber: String
-        let newProcessNumber: String
         if !isAbleToAppendNumbers {
             if !isUnderCalculation {
-                newPrevNumber = String(senderTag)
-                newDisplayNumber = String(senderTag)
-                newProcessPrevNumber = newPrevNumber
-                newProcessInputNumber = processInputNumber
-                newInputNumber = inputNumber
-                newProcessNumber = String(senderTag)
-
+                prevNumber = String(senderTag)
+                displayNumberLabelText = String(senderTag)
+                processPrevNumber = prevNumber
+                processNumberLabelText = String(senderTag)
             } else {
-                
-                newPrevNumber = prevNumber
-                newProcessPrevNumber = processPrevNumber
-                newProcessInputNumber = ""
-                newInputNumber = ""
-                newDisplayNumber = displayNumberLabelText
-                newProcessNumber = newProcessPrevNumber + newProcessInputNumber
-
+                processInputNumber = ""
+                inputNumber = ""
+                processNumberLabelText = processPrevNumber + processInputNumber
             }
-            
-            displayNumberLabelText = newDisplayNumber
-            prevNumber = newPrevNumber
-            processPrevNumber = newProcessPrevNumber
-            processNumberLabelText = newProcessNumber
-            inputNumber = newInputNumber
-            processInputNumber = newProcessInputNumber
-            
-            return
 
         } else {
             if !isUnderCalculation {
-                newPrevNumber = prevNumber == "0" ? String(senderTag) : (prevNumber + String(senderTag))
-                newDisplayNumber = newPrevNumber
-                newProcessPrevNumber = newPrevNumber
-                newProcessInputNumber = processInputNumber
-                newInputNumber = inputNumber
-                newProcessNumber = newProcessPrevNumber
+                prevNumber = prevNumber == "0" ? String(senderTag) : (prevNumber + String(senderTag))
+                displayNumberLabelText = prevNumber
+                processPrevNumber = prevNumber
+                processNumberLabelText = prevNumber
             } else {
-                newInputNumber = inputNumber + String(senderTag)
-                newDisplayNumber = newInputNumber
-                newPrevNumber = prevNumber
-                newProcessInputNumber = newInputNumber
-                newProcessPrevNumber = processPrevNumber
-                newProcessNumber = newProcessPrevNumber + newProcessInputNumber
+                inputNumber = inputNumber + String(senderTag)
+                displayNumberLabelText = inputNumber
+                processInputNumber = inputNumber
+                processNumberLabelText = processPrevNumber + processInputNumber
             }
-            displayNumberLabelText = newDisplayNumber
-            prevNumber = newPrevNumber
-            processPrevNumber = newProcessPrevNumber
-            processNumberLabelText = newProcessNumber
-            inputNumber = newInputNumber
-            processInputNumber = newProcessInputNumber
         }
 
     }
