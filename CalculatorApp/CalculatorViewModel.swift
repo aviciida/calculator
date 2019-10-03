@@ -71,8 +71,10 @@ class CalculatorViewModel {
     func judgeAbilityToAppendNumbers(senderTag: Int) {
         if !isUnderCalculation {
             isAbleToAppendNumbers = senderTag > 0 || senderTag == 0 && prevNumber.count > 0
-        } else {
-            isAbleToAppendNumbers = senderTag > 0 || senderTag == 0 && inputNumber.count > 0
+        } else if inputNumber == "" {
+            isAbleToAppendNumbers = true
+        } else if inputNumber == "0" {
+            isAbleToAppendNumbers = false
         }
     }
     
@@ -84,13 +86,24 @@ class CalculatorViewModel {
         let newProcessInputNumber: String
         let newInputNumber: String
         let newProcessNumber: String
-        if !isAbleToAppendNumbers && !isUnderCalculation {
-            newPrevNumber = prevNumber
-            newDisplayNumber = "0"
-            newProcessPrevNumber = processPrevNumber
-            newProcessInputNumber = processInputNumber
-            newInputNumber = inputNumber
-            newProcessNumber = "0"
+        if !isAbleToAppendNumbers {
+            if !isUnderCalculation {
+                newPrevNumber = String(senderTag)
+                newDisplayNumber = String(senderTag)
+                newProcessPrevNumber = newPrevNumber
+                newProcessInputNumber = processInputNumber
+                newInputNumber = inputNumber
+                newProcessNumber = String(senderTag)
+
+            } else {
+                newPrevNumber = prevNumber
+                newProcessPrevNumber = processPrevNumber
+                newProcessInputNumber = String(senderTag)
+                newInputNumber = String(senderTag)
+                newDisplayNumber = String(senderTag)
+                newProcessNumber = newProcessPrevNumber + newProcessInputNumber
+
+            }
             
             displayNumberLabelText = newDisplayNumber
             prevNumber = newPrevNumber
@@ -100,31 +113,31 @@ class CalculatorViewModel {
             processInputNumber = newProcessInputNumber
             
             return
-        } else if !isAbleToAppendNumbers && isUnderCalculation {
-            // TODO: Implement here.
-        }
-        
-        if !isUnderCalculation {
-            newPrevNumber = prevNumber + String(senderTag)
-            newDisplayNumber = newPrevNumber
-            newProcessPrevNumber = newPrevNumber
-            newProcessInputNumber = processInputNumber
-            newInputNumber = inputNumber
-            newProcessNumber = newProcessPrevNumber
+
         } else {
-            newInputNumber = inputNumber + String(senderTag)
-            newDisplayNumber = newInputNumber
-            newPrevNumber = prevNumber
-            newProcessInputNumber = newInputNumber
-            newProcessPrevNumber = processPrevNumber
-            newProcessNumber = newProcessPrevNumber + newProcessInputNumber
+            if !isUnderCalculation {
+                newPrevNumber = prevNumber + String(senderTag)
+                newDisplayNumber = newPrevNumber
+                newProcessPrevNumber = newPrevNumber
+                newProcessInputNumber = processInputNumber
+                newInputNumber = inputNumber
+                newProcessNumber = newProcessPrevNumber
+            } else {
+                newInputNumber = inputNumber + String(senderTag)
+                newDisplayNumber = newInputNumber
+                newPrevNumber = prevNumber
+                newProcessInputNumber = newInputNumber
+                newProcessPrevNumber = processPrevNumber
+                newProcessNumber = newProcessPrevNumber + newProcessInputNumber
+            }
+            displayNumberLabelText = newDisplayNumber
+            prevNumber = newPrevNumber
+            processPrevNumber = newProcessPrevNumber
+            processNumberLabelText = newProcessNumber
+            inputNumber = newInputNumber
+            processInputNumber = newProcessInputNumber
         }
-        displayNumberLabelText = newDisplayNumber
-        prevNumber = newPrevNumber
-        processPrevNumber = newProcessPrevNumber
-        processNumberLabelText = newProcessNumber
-        inputNumber = newInputNumber
-        processInputNumber = newProcessInputNumber
+
     }
     
     func calculationDidTap(senderTag: Int) {
