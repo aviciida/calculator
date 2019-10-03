@@ -79,6 +79,7 @@ class CalculatorViewModel {
             }
         } else {
             isAbleToAppendNumbers = true
+
         }
 
     }
@@ -91,13 +92,24 @@ class CalculatorViewModel {
         let newProcessInputNumber: String
         let newInputNumber: String
         let newProcessNumber: String
-        if !isAbleToAppendNumbers && !isUnderCalculation {
-            newPrevNumber = prevNumber
-            newDisplayNumber = "0"
-            newProcessPrevNumber = processPrevNumber
-            newProcessInputNumber = processInputNumber
-            newInputNumber = inputNumber
-            newProcessNumber = "0"
+        if !isAbleToAppendNumbers {
+            if !isUnderCalculation {
+                newPrevNumber = String(senderTag)
+                newDisplayNumber = String(senderTag)
+                newProcessPrevNumber = newPrevNumber
+                newProcessInputNumber = processInputNumber
+                newInputNumber = inputNumber
+                newProcessNumber = String(senderTag)
+
+            } else {
+                newPrevNumber = prevNumber
+                newProcessPrevNumber = processPrevNumber
+                newProcessInputNumber = String(senderTag)
+                newInputNumber = String(senderTag)
+                newDisplayNumber = String(senderTag)
+                newProcessNumber = newProcessPrevNumber + newProcessInputNumber
+
+            }
             
             displayNumberLabelText = newDisplayNumber
             prevNumber = newPrevNumber
@@ -107,17 +119,7 @@ class CalculatorViewModel {
             processInputNumber = newProcessInputNumber
             
             return
-        } else if !isAbleToAppendNumbers && isUnderCalculation {
-            // TODO: Implement here.
-        }
-        
-        if !isUnderCalculation {
-            newPrevNumber = prevNumber + String(senderTag)
-            newDisplayNumber = newPrevNumber
-            newProcessPrevNumber = newPrevNumber
-            newProcessInputNumber = processInputNumber
-            newInputNumber = inputNumber
-            newProcessNumber = newProcessPrevNumber
+
         } else {
             if !isUnderCalculation {
                 newPrevNumber = prevNumber == "0" ? String(senderTag) : (prevNumber + String(senderTag))
@@ -141,12 +143,7 @@ class CalculatorViewModel {
             inputNumber = newInputNumber
             processInputNumber = newProcessInputNumber
         }
-        displayNumberLabelText = newDisplayNumber
-        prevNumber = newPrevNumber
-        processPrevNumber = newProcessPrevNumber
-        processNumberLabelText = newProcessNumber
-        inputNumber = newInputNumber
-        processInputNumber = newProcessInputNumber
+
     }
     
     func calculationDidTap(senderTag: Int) {
