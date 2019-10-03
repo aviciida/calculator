@@ -102,11 +102,12 @@ class CalculatorViewModel {
                 newProcessNumber = String(senderTag)
 
             } else {
+                
                 newPrevNumber = prevNumber
                 newProcessPrevNumber = processPrevNumber
-                newProcessInputNumber = String(senderTag)
-                newInputNumber = String(senderTag)
-                newDisplayNumber = String(senderTag)
+                newProcessInputNumber = ""
+                newInputNumber = ""
+                newDisplayNumber = displayNumberLabelText
                 newProcessNumber = newProcessPrevNumber + newProcessInputNumber
 
             }
@@ -184,6 +185,8 @@ class CalculatorViewModel {
         isUnderCalculation = false
         displayNumberLabelText = "0"
         processNumberLabelText = "0"
+        processInputNumber = ""
+        processPrevNumber = ""
     }
     
     func calculate() {
