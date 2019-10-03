@@ -2,190 +2,80 @@
 //  CalculatorViewModel.swift
 //  CalculatorApp
 //
-//  Created by 飯田諒 on 2019/09/30.
+//  Created by Shun Usami on 2019/10/03.
 //  Copyright © 2019 RyoIida. All rights reserved.
 //
 
 import Foundation
 
-class CalculatorViewModel {
-    var processNumberLabelText = "0" {
+/// ViewModel for CalculatorViewController
+///
+/// Will be renamed to CalculatorViewModel.
+class NewCalculatorViewModel {
+    private var resultText = "0" {
         didSet {
-            processNumberHandler?(processNumberLabelText)
+            mainLabelTextHandler?(resultText)
         }
     }
-    var displayNumberLabelText = "0" {
+    private var rawText = "0" {
         didSet {
-            displayNumberHandler?(displayNumberLabelText)
+            subLabelTextHandler?(rawText)
         }
     }
     
-    var processNumberHandler: ((String) -> Void)? = nil {
+    // MARK: - Output
+    /// Handler which is called when main label text is changed
+    ///
+    /// ```
+    /// // Set handler
+    /// viewModel.mainLabelTextHandler = { [weak self] resultText in
+    ///     self?.mainLabel.text = resultText
+    /// }
+    /// ```
+    var mainLabelTextHandler: ((String) -> Void)? = nil {
         didSet {
-            processNumberHandler?(processNumberLabelText)
+            mainLabelTextHandler?(resultText)
         }
     }
-    var displayNumberHandler: ((String) -> Void)? = nil {
+    /// Handler which is called when sub label text is changed
+    ///
+    /// ```
+    /// // Set handler
+    /// viewModel.subLabelTextHandler = { [weak self] rawText in
+    ///     self?.subLabel.text = rawText
+    /// }
+    /// ```
+    var subLabelTextHandler: ((String) -> Void)? = nil {
         didSet {
-            displayNumberHandler?(displayNumberLabelText)
+            subLabelTextHandler?(rawText)
         }
     }
-    
-    var processPrevNumber: String = ""
-    var processInputNumber: String = ""
-    var processTotalNumber: String = ""
-    var prevNumber: String = ""
-    var inputNumber: String = ""
-    var resultNumber: Int = 0
-    var isUnderCalculation: Bool = false
-    var operation: OperationType = .add
-    var isAbleToAppendNumbers = false
-    
-    func popNumber() {
-        let newPrevNumber: String
-        let newInputNumber: String
-        let newDisplayNumber: String
-        let newProcessPrevNumber: String
-        let newProcessInputNumber: String
-        if !isUnderCalculation {
-            newPrevNumber = String(prevNumber.dropLast())
-            newProcessPrevNumber = String(processPrevNumber.dropLast())
-            newDisplayNumber = newPrevNumber
-            newInputNumber = inputNumber
-            newProcessInputNumber = processInputNumber
-        } else {
-            newInputNumber = String(inputNumber.dropLast())
-            newProcessPrevNumber = processPrevNumber
-            newDisplayNumber = newInputNumber
-            newPrevNumber = prevNumber
-            newProcessInputNumber = String(processInputNumber.dropLast())
-        }
-        prevNumber = newPrevNumber
-        inputNumber = newInputNumber
-        displayNumberLabelText = newDisplayNumber
-        processPrevNumber = newProcessPrevNumber
-        processInputNumber = newProcessInputNumber
-        processNumberLabelText = processPrevNumber + processInputNumber
-    }
-    
-    func judgeAbilityToAppendNumbers(senderTag: Int) {
-        if !isUnderCalculation {
-            isAbleToAppendNumbers = senderTag > 0 || senderTag == 0 && prevNumber.count > 0
-        } else if inputNumber == "" {
-            isAbleToAppendNumbers = true
-        } else if inputNumber == "0" {
-            isAbleToAppendNumbers = false
-        }
-    }
-    
-    func appendNumber(senderTag: Int) {
-        judgeAbilityToAppendNumbers(senderTag: senderTag)
-        let newPrevNumber: String
-        let newDisplayNumber: String
-        let newProcessPrevNumber: String
-        let newProcessInputNumber: String
-        let newInputNumber: String
-        let newProcessNumber: String
-        if !isAbleToAppendNumbers {
-            if !isUnderCalculation {
-                newPrevNumber = String(senderTag)
-                newDisplayNumber = String(senderTag)
-                newProcessPrevNumber = newPrevNumber
-                newProcessInputNumber = processInputNumber
-                newInputNumber = inputNumber
-                newProcessNumber = String(senderTag)
 
-            } else {
-                newPrevNumber = prevNumber
-                newProcessPrevNumber = processPrevNumber
-                newProcessInputNumber = String(senderTag)
-                newInputNumber = String(senderTag)
-                newDisplayNumber = String(senderTag)
-                newProcessNumber = newProcessPrevNumber + newProcessInputNumber
-
-            }
-            
-            displayNumberLabelText = newDisplayNumber
-            prevNumber = newPrevNumber
-            processPrevNumber = newProcessPrevNumber
-            processNumberLabelText = newProcessNumber
-            inputNumber = newInputNumber
-            processInputNumber = newProcessInputNumber
-            
-            return
-
-        } else {
-            if !isUnderCalculation {
-                newPrevNumber = prevNumber + String(senderTag)
-                newDisplayNumber = newPrevNumber
-                newProcessPrevNumber = newPrevNumber
-                newProcessInputNumber = processInputNumber
-                newInputNumber = inputNumber
-                newProcessNumber = newProcessPrevNumber
-            } else {
-                newInputNumber = inputNumber + String(senderTag)
-                newDisplayNumber = newInputNumber
-                newPrevNumber = prevNumber
-                newProcessInputNumber = newInputNumber
-                newProcessPrevNumber = processPrevNumber
-                newProcessNumber = newProcessPrevNumber + newProcessInputNumber
-            }
-            displayNumberLabelText = newDisplayNumber
-            prevNumber = newPrevNumber
-            processPrevNumber = newProcessPrevNumber
-            processNumberLabelText = newProcessNumber
-            inputNumber = newInputNumber
-            processInputNumber = newProcessInputNumber
+    // MARK: - Input
+    /// Input numbers, operators or dot as a String
+    func input(_ text: String?) {
+        guard let text = text, let calculatorInput = CalculatorInput(text) else { return }
+        if calculatorInput.isAppendableTo(rawText: rawText) {
+            rawText += text
         }
+        updateResult()
+    }
 
+    /// Input that delete button is tapped
+    func didTapDelete() {
+        // TODO: delete
+        updateResult()
     }
     
-    func calculationDidTap(senderTag: Int) {
-        if isUnderCalculation { calculate() }
-        isAbleToAppendNumbers = false
-        guard let result = OperationType.init(rawValue: senderTag) else { return }
-        operation = result
-        let calculationMark = operation.calculationMark()
-        
-        if !isUnderCalculation {
-            isUnderCalculation = true
-            processPrevNumber += calculationMark
-            processNumberLabelText = processPrevNumber
-        } else {
-            processPrevNumber = processPrevNumber + processInputNumber + calculationMark
-            processInputNumber = ""
-            processNumberLabelText = processPrevNumber
-            displayNumberLabelText = String(resultNumber)
-            prevNumber = String(resultNumber)
-            inputNumber = ""
-        }
+    /// Input that clear button is tapped
+    func didTapClear() {
+        // TODO: clear
+        updateResult()
     }
     
-    func showResultDidTap() {
-        calculate()
-        processPrevNumber = processPrevNumber + processInputNumber
-        displayNumberLabelText = String(resultNumber)
-        prevNumber = String(resultNumber)
-        inputNumber = ""
-        processNumberLabelText = processPrevNumber
-        processInputNumber = ""
+    // MARK: private functions
+    private func updateResult() {
+        let (numbers, operators) = CalculationParser.parse(rawText)
+        resultText = Calculator.calculate(numbers: numbers, operators: operators)
     }
-    
-    func clear() {
-        prevNumber = ""
-        inputNumber = ""
-        resultNumber = 0
-        isUnderCalculation = false
-        displayNumberLabelText = "0"
-        processNumberLabelText = "0"
-    }
-    
-    func calculate() {
-        if let prev = Int(prevNumber), let input = Int(inputNumber) {
-            resultNumber = operation.calculate(m: prev, n: input)
-        }
-    }
-    
-    
-    
 }

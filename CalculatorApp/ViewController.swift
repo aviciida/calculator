@@ -43,7 +43,6 @@ class ViewController: UIViewController {
             self?.displayNumber.text = newDisplayNumber
         }
         
-        
         // Do any additional setup after loading the view.
     }
     
@@ -61,7 +60,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func showResult (_ sender: Any) {
-        viewModel.showResultDidTap()
+        viewModel.didTapShowResult()
     }
     
     @IBAction func clearAll (_ sender: Any) {
