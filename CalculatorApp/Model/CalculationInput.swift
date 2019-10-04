@@ -10,18 +10,18 @@ import Foundation
 
 enum CalculationInput {
     case dot
-    case `operator`
-    case number
+    case `operator`(CalculationOperator)
+    case number(Int)
     
     init?(text: String?) {
         guard let inputText = text else { return nil }
         
         if inputText == "." {
             self = .dot
-        } else if let _ = Int(inputText) {
-            self = .number
-        } else if let _ = CalculationOperator.init(text: inputText) {
-            self = .operator
+        } else if let num = Int(inputText) {
+            self = .number(num)
+        } else if let op = CalculationOperator.init(text: inputText) {
+            self = .operator(op)
         } else {
             return nil
         }
