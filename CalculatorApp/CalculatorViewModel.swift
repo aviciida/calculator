@@ -37,7 +37,12 @@ class CalculatorViewModel {
     var prevNumber: String = ""
     var inputNumber: String = ""
     var resultNumber: Int = 0
-    var isUnderCalculation: Bool = false
+    @available(*, deprecated, renamed: "isCalculating")
+    var isUnderCalculation: Bool {
+        get { return isCalculating }
+        set { isCalculating = newValue}
+    }
+    var isCalculating: Bool = false
     var operation: OperationType = .add
     var isAbleToAppendNumbers = false
     
