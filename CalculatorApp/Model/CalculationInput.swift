@@ -16,7 +16,15 @@ enum CalculationInput {
     init?(text: String?) {
         guard let inputText = text else { return nil }
         
-        
+        if inputText == "." {
+            self = .dot
+        } else if let _ = Int(inputText) {
+            self = .number
+        } else if let _ = CalculationOperator.init(text: inputText) {
+            self = .operator
+        } else {
+            return nil
+        }
         
     }
     

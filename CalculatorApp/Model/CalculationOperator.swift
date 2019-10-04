@@ -13,4 +13,18 @@ enum CalculationOperator: String {
     case multiply = "×"
     case plus = "+"
     case minus = "-"
+    
+    init?(text: String) {
+        if text == "÷"{
+            self = .devide
+        } else if text == "×" {
+            self = .multiply
+        } else if text == "+" {
+            self = .plus
+        } else if text == "-" {
+            self = .minus
+        } else {
+            return nil
+        }
+    }
 }
