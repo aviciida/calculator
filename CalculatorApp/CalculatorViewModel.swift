@@ -47,7 +47,7 @@ class CalculatorViewModel {
     var isAbleToAppendNumbers = false
     
     func popNumber() {
-        if !isUnderCalculation {
+        if !isCalculating {
             prevNumber = String(prevNumber.dropLast())
             processPrevNumber = String(processPrevNumber.dropLast())
             displayNumberLabelText = prevNumber
@@ -63,7 +63,7 @@ class CalculatorViewModel {
         // もともと0を入れておいて、00になる場合はfalse、そうじゃなければtrueを返す感じで良さそう
         // と思ったけど、そうすると他のところで0をの場合とそうでない場合を分けなきゃいけないので、そのやり方は微妙感があるな
         if senderTag == 0 {
-            if !isUnderCalculation {
+            if !isCalculating {
                 isAbleToAppendNumbers = prevNumber != ""
             } else {
                 isAbleToAppendNumbers = inputNumber != ""
@@ -78,7 +78,7 @@ class CalculatorViewModel {
     func appendNumber(senderTag: Int) {
         judgeAbilityToAppendNumbers(senderTag: senderTag)
         if !isAbleToAppendNumbers {
-            if !isUnderCalculation {
+            if !isCalculating {
                 prevNumber = String(senderTag)
                 displayNumberLabelText = String(senderTag)
                 processPrevNumber = prevNumber
@@ -90,7 +90,7 @@ class CalculatorViewModel {
             }
 
         } else {
-            if !isUnderCalculation {
+            if !isCalculating {
                 prevNumber = prevNumber == "0" ? String(senderTag) : (prevNumber + String(senderTag))
                 displayNumberLabelText = prevNumber
                 processPrevNumber = prevNumber
@@ -106,14 +106,14 @@ class CalculatorViewModel {
     }
     
     func calculationDidTap(senderTag: Int) {
-        if isUnderCalculation { calculate() }
+        if isCalculating { calculate() }
         isAbleToAppendNumbers = false
         guard let result = OperationType.init(rawValue: senderTag) else { return }
         operation = result
         let calculationMark = operation.calculationMark()
         
-        if !isUnderCalculation {
-            isUnderCalculation = true
+        if !isCalculating {
+            isCalculating = true
             processPrevNumber += calculationMark
             processNumberLabelText = processPrevNumber
         } else {
@@ -140,7 +140,7 @@ class CalculatorViewModel {
         prevNumber = ""
         inputNumber = ""
         resultNumber = 0
-        isUnderCalculation = false
+        isCalculating = false
         displayNumberLabelText = "0"
         processNumberLabelText = "0"
         processInputNumber = ""
