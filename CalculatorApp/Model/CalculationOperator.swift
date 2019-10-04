@@ -8,6 +8,9 @@
 
 import Foundation
 
-enum CalculationOperator {
-    
+enum CalculationOperator: String {
+    case devide = "÷"
+    case multiply = "×"
+    case plus = "+"
+    case minus = "-"
 }
