@@ -232,6 +232,7 @@ class CalculatorAppViewModelTests: XCTestCase {
         
     }
 
+    // mvoed
     func testInitialLabelTextValue() {
         let viewModel = CalculatorViewModel()
         var value: String? = nil

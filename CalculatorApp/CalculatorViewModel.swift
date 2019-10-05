@@ -33,7 +33,11 @@ class NewCalculatorViewModel {
     ///     self?.subLabel.text = subLabel
     /// }
     /// ```
-    var mainLabelTextHandler: ((String) -> Void)? = nil
+    var mainLabelTextHandler: ((String) -> Void)? = nil {
+        didSet {
+            mainLabelTextHandler?(resultText)
+        }
+    }
     
     /// Handler called when subLabelText is changed
     ///
@@ -43,21 +47,31 @@ class NewCalculatorViewModel {
     ///     self?.subLabel.text = subLabel
     /// }
     /// ```
-    var subLabelTextHandler: ((String) -> Void)? = nil
+    var subLabelTextHandler: ((String) -> Void)? = nil {
+        didSet {
+            subLabelTextHandler?(rawText)
+        }
+    }
     
     /// Input numbers, operators, or dots
     func input(_ text: String) {
         
+        updateResult()
     }
     
     /// Called when delete button is tapped
     func didTapDelete() {
         
+        updateResult()
     }
     
     /// Called when clear button is tapped
     func didTapClear() {
+        
+        updateResult()
     }
     
-    
+    private func updateResult() {
+        // implement calculation and update resultLabel
+    }
 }
