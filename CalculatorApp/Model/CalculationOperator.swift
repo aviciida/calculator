@@ -15,13 +15,13 @@ enum CalculationOperator: String {
     case minus = "-"
     
     init?(text: String) {
-        if text == "÷"{
+        if text == CalculationOperator.devide.rawValue{
             self = .devide
-        } else if text == "×" {
+        } else if text == CalculationOperator.multiply.rawValue {
             self = .multiply
-        } else if text == "+" {
+        } else if text == CalculationOperator.plus.rawValue {
             self = .plus
-        } else if text == "-" {
+        } else if text == CalculationOperator.minus.rawValue {
             self = .minus
         } else {
             return nil
