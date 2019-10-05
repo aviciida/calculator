@@ -29,6 +29,13 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         }
     }
     
+    /// Helper function to create preset condition
+    func input(_ text: String, to vm: NewCalculatorViewModel) {
+        for c in text {
+            vm.input(String(c))
+        }
+    }
+    
     func testInitialLabelTextValue() {
         XCTAssertEqual(resultTextLabel, "0") // resultTextが初期値0で設定されている
         XCTAssertEqual(rawTextLabel, "0") // rawTextが初期値0で設定されている
@@ -61,8 +68,7 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "")
         
         // Given
-        viewModel.mainLabelTextHandler?("23")
-        viewModel.subLabelTextHandler?("23")
+        input("23", to: viewModel)
         // When
         viewModel.input("+")
         // Then
@@ -70,8 +76,7 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(resultTextLabel, "23")
         
         // Given
-        viewModel.mainLabelTextHandler?("20")
-        viewModel.subLabelTextHandler?("10+10")
+        input("10+10", to: viewModel)
         // When
         viewModel.input("1")
         // Then
@@ -79,8 +84,7 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(resultTextLabel, "111")
         
         // Given
-        viewModel.mainLabelTextHandler?("20")
-        viewModel.subLabelTextHandler?("10+101+")
+        input("10+101+", to: viewModel)
         // When
         viewModel.input("1")
         // Then
@@ -88,19 +92,15 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(resultTextLabel, "112")
         
         // Given
-        viewModel.mainLabelTextHandler?("100")
-        viewModel.subLabelTextHandler?("10×10")
+        input("10×10", to: viewModel)
         // When
         viewModel.input("1")
         // Then
         XCTAssertEqual(rawTextLabel, "10×101")
         XCTAssertEqual(resultTextLabel, "1010")
-        
-        
 
         // Given
-        viewModel.mainLabelTextHandler?("23")
-        viewModel.subLabelTextHandler?("23+")
+        input("23+", to: viewModel)
         // When
         viewModel.input("0")
         // Then
@@ -108,8 +108,7 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "23+")
         
         // Given
-        viewModel.mainLabelTextHandler?("23")
-        viewModel.subLabelTextHandler?("23+")
+        input("23+", to: viewModel)
         // When
         viewModel.input("+")
         // Then
@@ -117,8 +116,7 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "23+")
         
         // Given
-        viewModel.mainLabelTextHandler?("23")
-        viewModel.subLabelTextHandler?("23+")
+        input("23+", to: viewModel)
         // When
         viewModel.input("-")
         // Then
@@ -126,8 +124,8 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "23-")
         
         // Given
-        viewModel.mainLabelTextHandler?("23")
-        viewModel.subLabelTextHandler?("23+")
+        input("23+", to: viewModel)
+
         // When
         viewModel.input("÷")
         // Then
@@ -135,23 +133,15 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "23÷")
         
         // Given
-        viewModel.mainLabelTextHandler?("23")
-        viewModel.subLabelTextHandler?("23+")
+        input("23+", to: viewModel)
         // When
         viewModel.input("×")
         // Then
         XCTAssertEqual(resultTextLabel, "23")
         XCTAssertEqual(rawTextLabel, "23×")
-        
-        
-        
-        
     }
     
     func testDidTapDelete() {
-        // Given
-        viewModel.mainLabelTextHandler?("")
-        viewModel.subLabelTextHandler?("")
         // When
         viewModel.didTapDelete()
         // Then
@@ -159,8 +149,8 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "")
         
         // Given
-        viewModel.mainLabelTextHandler?("2")
-        viewModel.subLabelTextHandler?("2")
+        input("2", to: viewModel)
+
         // When
         viewModel.didTapDelete()
         // Then
@@ -168,8 +158,8 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "")
         
         // Given
-        viewModel.mainLabelTextHandler?("2")
-        viewModel.subLabelTextHandler?("2+")
+        input("2+", to: viewModel)
+
         // When
         viewModel.didTapDelete()
         // Then
@@ -177,8 +167,7 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "2")
         
         // Given
-        viewModel.mainLabelTextHandler?("53")
-        viewModel.subLabelTextHandler?("21+32")
+        input("21+32", to: viewModel)
         // When
         viewModel.didTapDelete()
         // Then
@@ -186,8 +175,7 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "21+3")
         
         // Given
-        viewModel.mainLabelTextHandler?("340")
-        viewModel.subLabelTextHandler?("349-9")
+        input("349-9", to: viewModel)
         // When
         viewModel.didTapDelete()
         // Then
@@ -207,8 +195,7 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "")
         
         // Given
-        viewModel.mainLabelTextHandler?("2")
-        viewModel.subLabelTextHandler?("2")
+        input("2", to: viewModel)
         // When
         viewModel.didTapClear()
         // Then
@@ -216,8 +203,8 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "")
         
         // Given
-        viewModel.mainLabelTextHandler?("2")
-        viewModel.subLabelTextHandler?("2+")
+        input("2+", to: viewModel)
+
         // When
         viewModel.didTapClear()
         // Then
@@ -225,8 +212,7 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "")
         
         // Given
-        viewModel.mainLabelTextHandler?("53")
-        viewModel.subLabelTextHandler?("21+32")
+        input("23+3+4+", to: viewModel)
         // When
         viewModel.didTapClear()
         // Then
@@ -234,8 +220,7 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "")
         
         // Given
-        viewModel.mainLabelTextHandler?("340")
-        viewModel.subLabelTextHandler?("349-9")
+        input("349-9", to: viewModel)
         // When
         viewModel.didTapClear()
         // Then
