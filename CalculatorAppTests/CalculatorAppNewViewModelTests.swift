@@ -50,24 +50,27 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "8")
         
         // When
+        viewModel.didTapClear()
         viewModel.input("0")
         // Then
-        XCTAssertEqual(resultTextLabel, "")
-        XCTAssertEqual(rawTextLabel, "")
+        XCTAssertEqual(resultTextLabel, "0")
+        XCTAssertEqual(rawTextLabel, "0")
         
         // When
+        viewModel.didTapClear()
         viewModel.input("=")
         // Then
-        XCTAssertEqual(resultTextLabel, "")
-        XCTAssertEqual(rawTextLabel, "")
+        XCTAssertEqual(resultTextLabel, "0")
+        XCTAssertEqual(rawTextLabel, "0")
         
         // When
         viewModel.input("+")
         // Then
-        XCTAssertEqual(resultTextLabel, "")
-        XCTAssertEqual(rawTextLabel, "")
+        XCTAssertEqual(resultTextLabel, "0")
+        XCTAssertEqual(rawTextLabel, "0+")
         
         // Given
+        viewModel.didTapClear()
         input("23", to: viewModel)
         // When
         viewModel.input("+")
@@ -76,6 +79,7 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(resultTextLabel, "23")
         
         // Given
+        viewModel.didTapClear()
         input("10+10", to: viewModel)
         // When
         viewModel.input("1")
@@ -84,14 +88,16 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(resultTextLabel, "111")
         
         // Given
+        viewModel.didTapClear()
         input("10+101+", to: viewModel)
         // When
         viewModel.input("1")
         // Then
-        XCTAssertEqual(rawTextLabel, "10+101")
+        XCTAssertEqual(rawTextLabel, "10+101+1")
         XCTAssertEqual(resultTextLabel, "112")
         
         // Given
+        viewModel.didTapClear()
         input("10×10", to: viewModel)
         // When
         viewModel.input("1")
@@ -100,14 +106,16 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(resultTextLabel, "1010")
 
         // Given
+        viewModel.didTapClear()
         input("23+", to: viewModel)
         // When
         viewModel.input("0")
         // Then
         XCTAssertEqual(resultTextLabel, "23")
-        XCTAssertEqual(rawTextLabel, "23+")
+        XCTAssertEqual(rawTextLabel, "23+0")
         
         // Given
+        viewModel.didTapClear()
         input("23+", to: viewModel)
         // When
         viewModel.input("+")
@@ -116,6 +124,7 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "23+")
         
         // Given
+        viewModel.didTapClear()
         input("23+", to: viewModel)
         // When
         viewModel.input("-")
@@ -124,6 +133,7 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "23-")
         
         // Given
+        viewModel.didTapClear()
         input("23+", to: viewModel)
 
         // When
@@ -133,6 +143,7 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "23÷")
         
         // Given
+        viewModel.didTapClear()
         input("23+", to: viewModel)
         // When
         viewModel.input("×")
@@ -191,16 +202,16 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         // When
         viewModel.didTapClear()
         // Then
-        XCTAssertEqual(resultTextLabel, "")
-        XCTAssertEqual(rawTextLabel, "")
+        XCTAssertEqual(resultTextLabel, "0")
+        XCTAssertEqual(rawTextLabel, "0")
         
         // Given
         input("2", to: viewModel)
         // When
         viewModel.didTapClear()
         // Then
-        XCTAssertEqual(resultTextLabel, "")
-        XCTAssertEqual(rawTextLabel, "")
+        XCTAssertEqual(resultTextLabel, "0")
+        XCTAssertEqual(rawTextLabel, "0")
         
         // Given
         input("2+", to: viewModel)
@@ -208,24 +219,24 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         // When
         viewModel.didTapClear()
         // Then
-        XCTAssertEqual(resultTextLabel, "")
-        XCTAssertEqual(rawTextLabel, "")
+        XCTAssertEqual(resultTextLabel, "0")
+        XCTAssertEqual(rawTextLabel, "0")
         
         // Given
         input("23+3+4+", to: viewModel)
         // When
         viewModel.didTapClear()
         // Then
-        XCTAssertEqual(resultTextLabel, "")
-        XCTAssertEqual(rawTextLabel, "")
+        XCTAssertEqual(resultTextLabel, "0")
+        XCTAssertEqual(rawTextLabel, "0")
         
         // Given
         input("349-9", to: viewModel)
         // When
         viewModel.didTapClear()
         // Then
-        XCTAssertEqual(resultTextLabel, "")
-        XCTAssertEqual(rawTextLabel, "")
+        XCTAssertEqual(resultTextLabel, "0")
+        XCTAssertEqual(rawTextLabel, "0")
     }
     
 }
