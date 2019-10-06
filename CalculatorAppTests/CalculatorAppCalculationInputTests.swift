@@ -47,27 +47,28 @@ class CalculatorAppCalculationInputTests: XCTestCase {
         let input = CalculationInput.number(1)
         XCTAssertEqual(input.canAppendTo(rawText: "0"), true)
         XCTAssertEqual(input.canAppendTo(rawText: "2+"), true)
-        
+
         let input1 = CalculationInput.number(0)
         XCTAssertEqual(input1.canAppendTo(rawText: "0"), false)
         XCTAssertEqual(input1.canAppendTo(rawText: "1"), true)
         XCTAssertEqual(input1.canAppendTo(rawText: "2+"), true)
         XCTAssertEqual(input1.canAppendTo(rawText: "2+0"), false)
-        
+
         let input2 = CalculationInput.operator(.devide)
         XCTAssertEqual(input2.canAppendTo(rawText: ""), false )
         XCTAssertEqual(input2.canAppendTo(rawText: "2"), true )
         XCTAssertEqual(input2.canAppendTo(rawText: "2+"), true )
-        
+
         let input3 = CalculationInput.dot
         XCTAssertEqual(input3.canAppendTo(rawText: "0"), true)
         XCTAssertEqual(input3.canAppendTo(rawText: "0."), false)
         XCTAssertEqual(input3.canAppendTo(rawText: "34"), true)
-        XCTAssertEqual(input3.canAppendTo(rawText: "3+"), false)
+        XCTAssertEqual(input3.canAppendTo(rawText: "3+"), true) // 3+0.
+        XCTAssertEqual(input3.canAppendTo(rawText: "4.234"), false)
         XCTAssertEqual(input3.canAppendTo(rawText: "40-0"), true)
         XCTAssertEqual(input3.canAppendTo(rawText: "48-34-3"), true)
-        
-        
+
+
         
     }
 

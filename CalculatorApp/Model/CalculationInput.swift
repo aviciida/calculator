@@ -29,9 +29,31 @@ enum CalculationInput: Equatable {
     }
     
     func canAppendTo(rawText: String) -> Bool {
-        // TODO: implement here.
-        // inputのタイプによって、rawTextの最後が何の場合はokで何の場合はngかあるので、それでswitch してケース分けする（ex: .dotの場合は、演算子/ドットじゃなければok）
-
-        return false
+        guard rawText.count > 0 || rawText.count == 25 else { return false }
+        switch self {
+        case .number(1...9):
+            return true
+        case .number(0):
+            let rawTextArray = Array(rawText)
+            if rawText == "0" {
+                // If it's still at the initial state and get an input 0, false
+                return false
+            } else if String(rawTextArray.last!) == "0" {
+                // If it's 100, true. If it's 12+0, false
+                if let _ = CalculationOperator.init(text: String(rawTextArray.dropLast().last!)) {
+                    return false
+                } else {
+                    return true
+                }
+            } else {
+                return true
+            }
+        case .operator:
+            return true
+        case .dot:
+            return false
+        default:
+            return false
+        }
     }
 }
