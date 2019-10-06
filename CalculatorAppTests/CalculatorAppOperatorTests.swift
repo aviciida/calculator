@@ -7,6 +7,7 @@
 //
 
 import XCTest
+@testable import CalculatorApp
 
 class CalculatorAppOperatorTests: XCTestCase {
 
@@ -14,20 +15,29 @@ class CalculatorAppOperatorTests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+    func testInit() {
+        let op1 = CalculationOperator.init(text: "+")
+        XCTAssertTrue(op1 == .some(.plus))
+        
+        let op2 = CalculationOperator.init(text: "-")
+        XCTAssertTrue(op2 == .some(.minus))
+        
+        let op3 = CalculationOperator.init(text: "×")
+        XCTAssertTrue(op3 == .some(.multiply))
+        
+        let op4 = CalculationOperator.init(text: "÷")
+        XCTAssertTrue(op4 == .some(.devide))
+        
+        let op5 = CalculationOperator.init(text: "0")
+        XCTAssertTrue(op5 == nil)
+        
+        let op6 = CalculationOperator.init(text: "9")
+        XCTAssertTrue(op6 == nil)
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+        let op7 = CalculationOperator.init(text: "あ")
+        XCTAssertTrue(op7 == nil)
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+        
     }
 
 }
