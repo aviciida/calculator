@@ -156,21 +156,21 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         // When
         viewModel.didTapDelete()
         // Then
-        XCTAssertEqual(resultTextLabel, "")
-        XCTAssertEqual(rawTextLabel, "")
+        XCTAssertEqual(resultTextLabel, "0")
+        XCTAssertEqual(rawTextLabel, "0")
         
         // Given
+        viewModel.didTapClear()
         input("2", to: viewModel)
-
         // When
         viewModel.didTapDelete()
         // Then
-        XCTAssertEqual(resultTextLabel, "")
+        XCTAssertEqual(resultTextLabel, "0")
         XCTAssertEqual(rawTextLabel, "")
         
         // Given
+        viewModel.didTapClear()
         input("2+", to: viewModel)
-
         // When
         viewModel.didTapDelete()
         // Then
@@ -178,6 +178,7 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "2")
         
         // Given
+        viewModel.didTapClear()
         input("21+32", to: viewModel)
         // When
         viewModel.didTapDelete()
@@ -186,6 +187,7 @@ class CalculatorAppNewViewModelTests: XCTestCase {
         XCTAssertEqual(rawTextLabel, "21+3")
         
         // Given
+        viewModel.didTapClear()
         input("349-9", to: viewModel)
         // When
         viewModel.didTapDelete()

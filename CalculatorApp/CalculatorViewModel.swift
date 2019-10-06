@@ -70,7 +70,9 @@ class NewCalculatorViewModel {
     
     /// Called when delete button is tapped
     func didTapDelete() {
-        
+        if rawText != "0" {
+            rawText = String(rawText.dropLast())
+        }
         updateResult()
     }
     
