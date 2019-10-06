@@ -55,7 +55,16 @@ class NewCalculatorViewModel {
     
     /// Input numbers, operators, or dots
     func input(_ text: String) {
-        
+        if let input = CalculationInput.init(text: text) {
+            if input.canAppendTo(rawText: rawText) {
+                if input.shouldReplace(rawText: rawText) {
+                    rawText = String(rawText.dropLast())
+                    rawText += text
+                } else {
+                    rawText += text
+                }
+            }
+        }
         updateResult()
     }
     
@@ -67,11 +76,16 @@ class NewCalculatorViewModel {
     
     /// Called when clear button is tapped
     func didTapClear() {
-        
+        rawText = "0"
+        resultText = "0"
         updateResult()
     }
     
     private func updateResult() {
         // implement calculation and update resultLabel
+        let parsed = CalculationParser.parse(rawText)
+        let result = Calculator.calculate(parsed.numbers, operators: parsed.operators)
+        resultText = result
+        
     }
 }

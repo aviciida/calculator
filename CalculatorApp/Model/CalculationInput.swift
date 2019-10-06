@@ -56,4 +56,20 @@ enum CalculationInput: Equatable {
             return false
         }
     }
+    
+    func shouldReplace(rawText: String) -> Bool {
+        guard rawText.count > 0 else { return false }
+        switch self {
+        case .operator:
+            if let _ = CalculationOperator.init(text: String(rawText.last!)) {
+                return true
+            } else {
+                return false
+            }
+        case .number:
+            return rawText == "0" // Replace if rawText is 0 to prevent something like "032"
+        @unknown default:
+            return false
+        }
+    }
 }
