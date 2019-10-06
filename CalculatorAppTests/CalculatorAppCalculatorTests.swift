@@ -56,6 +56,11 @@ class CalculatorAppCalculatorTests: XCTestCase {
         let result7 = Calculator.calculate(numbers7, operators: operators7)
         XCTAssertEqual(result7, "0")
         
+        let numbers8 = ["0"]
+        let operators8 = [CalculationOperator.multiply]
+        let result8 = Calculator.calculate(numbers8, operators: operators8)
+        XCTAssertEqual(result8, "0")
+        
     }
 
 }

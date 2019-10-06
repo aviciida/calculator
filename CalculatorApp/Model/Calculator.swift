@@ -13,10 +13,10 @@ struct Calculator {
     /// Input numbers as String and operators as CalculationOperator and returns result text as String
     static func calculate(_ numbers: [String], operators: [CalculationOperator]) -> String {
         guard let firstNumber = numbers.first, var resultNumber = Float(firstNumber) else { return "0" }
-        let leftNumbers: [Float] = Array(numbers.dropFirst()).map { (Float($0)!) }
-        let arrayCount: Int = leftNumbers.count >= operators.count ? numbers.count : operators.count // get the higher number
+        let leftNumbers: [Float] = Array(numbers.dropFirst()).map { Float($0)! }
+        let arrayCount: Int = leftNumbers.count >= operators.count ? leftNumbers.count : operators.count // get the higher number
         for i in 0...arrayCount {
-            guard operators.count > i && leftNumbers.count > i else { break }
+            guard operators.count > i && leftNumbers.count > i else { break } // Prevent index out of range to happen
             let op = operators[i]
             if let resultFloat = Float(op.calculate(resultNumber, leftNumbers[i])) {
                 resultNumber = resultFloat
