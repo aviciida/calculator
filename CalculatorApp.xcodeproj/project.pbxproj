@@ -7,10 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A828746C23423B6700BEA340 /* CalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A828746B23423B6700BEA340 /* CalculatorViewModel.swift */; };
+		A828746C23423B6700BEA340 /* DeprecatedCalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A828746B23423B6700BEA340 /* DeprecatedCalculatorViewModel.swift */; };
 		A83F120123405A82009675C5 /* CalculatorAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83F120023405A82009675C5 /* CalculatorAppTests.swift */; };
+		A88819FD2348753500A51FB1 /* CalculatorAppNewViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88819FC2348753500A51FB1 /* CalculatorAppNewViewModelTests.swift */; };
+		A88819FF234881E600A51FB1 /* CalculatorAppOperatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88819FE234881E600A51FB1 /* CalculatorAppOperatorTests.swift */; };
 		A89029432343303A005DDD19 /* CalculatorAppViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A89029422343303A005DDD19 /* CalculatorAppViewModelTests.swift */; };
 		A8A84806234050F0004EFB31 /* Calculations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A84805234050F0004EFB31 /* Calculations.swift */; };
+		A8BF788A234968480022BA0A /* CalculatorAppCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BF7889234968480022BA0A /* CalculatorAppCalculatorTests.swift */; };
+		A8BF788C2349687D0022BA0A /* CalculatorAppCalculationInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BF788B2349687D0022BA0A /* CalculatorAppCalculationInputTests.swift */; };
+		A8BF788E23499A330022BA0A /* CalculatorAppCalculationParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BF788D23499A330022BA0A /* CalculatorAppCalculationParserTests.swift */; };
+		A8FB13682346EF8D0073242A /* CalculatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FB13672346EF8D0073242A /* CalculatorViewModel.swift */; };
+		A8FB136B2347090A0073242A /* CalculationOperator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FB136A2347090A0073242A /* CalculationOperator.swift */; };
+		A8FB136D2347092F0073242A /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FB136C2347092F0073242A /* Calculator.swift */; };
+		A8FB136F234709640073242A /* CalculationInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FB136E234709640073242A /* CalculationInput.swift */; };
+		A8FB1371234709960073242A /* CalculationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FB1370234709960073242A /* CalculationParser.swift */; };
 		A8FCF33622826F4D00E6050A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FCF33522826F4D00E6050A /* AppDelegate.swift */; };
 		A8FCF33822826F4D00E6050A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8FCF33722826F4D00E6050A /* ViewController.swift */; };
 		A8FCF33B22826F4E00E6050A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8FCF33922826F4E00E6050A /* Main.storyboard */; };
@@ -30,12 +40,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		A828746B23423B6700BEA340 /* CalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewModel.swift; sourceTree = "<group>"; };
+		A828746B23423B6700BEA340 /* DeprecatedCalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeprecatedCalculatorViewModel.swift; sourceTree = "<group>"; };
 		A83F11FE23405A82009675C5 /* CalculatorAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A83F120023405A82009675C5 /* CalculatorAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorAppTests.swift; sourceTree = "<group>"; };
 		A83F120223405A82009675C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A88819FC2348753500A51FB1 /* CalculatorAppNewViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorAppNewViewModelTests.swift; sourceTree = "<group>"; };
+		A88819FE234881E600A51FB1 /* CalculatorAppOperatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorAppOperatorTests.swift; sourceTree = "<group>"; };
 		A89029422343303A005DDD19 /* CalculatorAppViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorAppViewModelTests.swift; sourceTree = "<group>"; };
 		A8A84805234050F0004EFB31 /* Calculations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculations.swift; sourceTree = "<group>"; };
+		A8BF7889234968480022BA0A /* CalculatorAppCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorAppCalculatorTests.swift; sourceTree = "<group>"; };
+		A8BF788B2349687D0022BA0A /* CalculatorAppCalculationInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorAppCalculationInputTests.swift; sourceTree = "<group>"; };
+		A8BF788D23499A330022BA0A /* CalculatorAppCalculationParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorAppCalculationParserTests.swift; sourceTree = "<group>"; };
+		A8FB13672346EF8D0073242A /* CalculatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewModel.swift; sourceTree = "<group>"; };
+		A8FB136A2347090A0073242A /* CalculationOperator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationOperator.swift; sourceTree = "<group>"; };
+		A8FB136C2347092F0073242A /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
+		A8FB136E234709640073242A /* CalculationInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationInput.swift; sourceTree = "<group>"; };
+		A8FB1370234709960073242A /* CalculationParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationParser.swift; sourceTree = "<group>"; };
 		A8FCF33222826F4D00E6050A /* CalculatorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalculatorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8FCF33522826F4D00E6050A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A8FCF33722826F4D00E6050A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,11 +87,35 @@
 		A83F11FF23405A82009675C5 /* CalculatorAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				A88819FC2348753500A51FB1 /* CalculatorAppNewViewModelTests.swift */,
+				A8BF788D23499A330022BA0A /* CalculatorAppCalculationParserTests.swift */,
+				A8BF788B2349687D0022BA0A /* CalculatorAppCalculationInputTests.swift */,
+				A8BF7889234968480022BA0A /* CalculatorAppCalculatorTests.swift */,
+				A88819FE234881E600A51FB1 /* CalculatorAppOperatorTests.swift */,
 				A83F120023405A82009675C5 /* CalculatorAppTests.swift */,
 				A89029422343303A005DDD19 /* CalculatorAppViewModelTests.swift */,
 				A83F120223405A82009675C5 /* Info.plist */,
 			);
 			path = CalculatorAppTests;
+			sourceTree = "<group>";
+		};
+		A8FB13662346EEF50073242A /* Deprecated */ = {
+			isa = PBXGroup;
+			children = (
+				A828746B23423B6700BEA340 /* DeprecatedCalculatorViewModel.swift */,
+			);
+			path = Deprecated;
+			sourceTree = "<group>";
+		};
+		A8FB1369234708E60073242A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A8FB136A2347090A0073242A /* CalculationOperator.swift */,
+				A8FB136C2347092F0073242A /* Calculator.swift */,
+				A8FB136E234709640073242A /* CalculationInput.swift */,
+				A8FB1370234709960073242A /* CalculationParser.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		A8FCF32922826F4D00E6050A = {
@@ -100,7 +144,9 @@
 				A8FCF33922826F4E00E6050A /* Main.storyboard */,
 				A8FCF347228283B300E6050A /* OperationType.swift */,
 				A8A84805234050F0004EFB31 /* Calculations.swift */,
-				A828746B23423B6700BEA340 /* CalculatorViewModel.swift */,
+				A8FB13672346EF8D0073242A /* CalculatorViewModel.swift */,
+				A8FB1369234708E60073242A /* Model */,
+				A8FB13662346EEF50073242A /* Deprecated */,
 				A8FCF33C22826F4F00E6050A /* Assets.xcassets */,
 				A8FCF33E22826F4F00E6050A /* LaunchScreen.storyboard */,
 				A8FCF34122826F4F00E6050A /* Info.plist */,
@@ -210,6 +256,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				A89029432343303A005DDD19 /* CalculatorAppViewModelTests.swift in Sources */,
+				A8BF788E23499A330022BA0A /* CalculatorAppCalculationParserTests.swift in Sources */,
+				A8BF788A234968480022BA0A /* CalculatorAppCalculatorTests.swift in Sources */,
+				A8BF788C2349687D0022BA0A /* CalculatorAppCalculationInputTests.swift in Sources */,
+				A88819FD2348753500A51FB1 /* CalculatorAppNewViewModelTests.swift in Sources */,
+				A88819FF234881E600A51FB1 /* CalculatorAppOperatorTests.swift in Sources */,
 				A83F120123405A82009675C5 /* CalculatorAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,11 +269,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8FB1371234709960073242A /* CalculationParser.swift in Sources */,
 				A8FCF33822826F4D00E6050A /* ViewController.swift in Sources */,
 				A8FCF33622826F4D00E6050A /* AppDelegate.swift in Sources */,
+				A8FB136B2347090A0073242A /* CalculationOperator.swift in Sources */,
 				A8FCF348228283B300E6050A /* OperationType.swift in Sources */,
 				A8A84806234050F0004EFB31 /* Calculations.swift in Sources */,
-				A828746C23423B6700BEA340 /* CalculatorViewModel.swift in Sources */,
+				A8FB136F234709640073242A /* CalculationInput.swift in Sources */,
+				A8FB136D2347092F0073242A /* Calculator.swift in Sources */,
+				A8FB13682346EF8D0073242A /* CalculatorViewModel.swift in Sources */,
+				A828746C23423B6700BEA340 /* DeprecatedCalculatorViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

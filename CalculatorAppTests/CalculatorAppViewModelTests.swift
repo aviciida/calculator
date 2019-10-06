@@ -232,6 +232,7 @@ class CalculatorAppViewModelTests: XCTestCase {
         
     }
 
+    // mvoed
     func testInitialLabelTextValue() {
         let viewModel = CalculatorViewModel()
         var value: String? = nil
@@ -283,7 +284,7 @@ class CalculatorAppViewModelTests: XCTestCase {
         viewModel.processInputNumber = "99"
         viewModel.inputNumber = "99"
         viewModel.operation = .add
-        viewModel.showResultDidTap()
+        viewModel.didTapShowResult()
         
         XCTAssertEqual(viewModel.processPrevNumber, "21*45+99")
         XCTAssertEqual(viewModel.resultNumber, 1044)
