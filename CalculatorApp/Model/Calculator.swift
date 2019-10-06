@@ -11,7 +11,7 @@ import Foundation
 /// Implement calculation with given numbers and operators
 struct Calculator {
     /// Input numbers as String and operators as CalculationOperator and returns result text as String
-    static func calculate(_ numbers: [String], operator: [CalculationOperator]) -> String {
+    static func calculate(_ numbers: [String], operators: [CalculationOperator]) -> String {
         
         return ""
     }
