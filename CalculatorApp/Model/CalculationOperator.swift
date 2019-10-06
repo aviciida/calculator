@@ -27,4 +27,22 @@ enum CalculationOperator: String {
             return nil
         }
     }
+    
+    func calculate(_ firstInt: Float, _ secondInt: Float) -> String {
+        // TODO: Implement test for this function!
+        switch self {
+        case .devide:
+            if secondInt == 0 {
+                return "ゼロで割らないで"
+            } else {
+                return String(firstInt/secondInt)
+            }
+        case .multiply:
+            return String(firstInt*secondInt)
+        case .plus:
+            return String(firstInt+secondInt)
+        case .minus:
+            return String(firstInt-secondInt)
+        }
+    }
 }
