@@ -9,6 +9,11 @@
 import Foundation
 
 /// Parse rawText provided from VC into numbers and operators
-class CalculationParser {
-    
+struct CalculationParser {
+        
+    /// Input text that includes numbers and operators, parse it, and returns an array of numbers as String and an array of operators as CalculationOperator
+    static func parse(_ text: String) -> (numbers: [String], operators: [CalculationOperator]) {
+        
+        return (numbers: ["23", "3"], operators: [CalculationOperator.devide])
+    }
 }
