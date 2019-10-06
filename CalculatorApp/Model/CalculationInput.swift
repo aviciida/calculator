@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum CalculationInput {
+enum CalculationInput: Equatable {
     case dot
     case `operator`(CalculationOperator)
     case number(Int)
