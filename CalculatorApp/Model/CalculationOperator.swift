@@ -28,11 +28,15 @@ enum CalculationOperator: String {
         }
     }
     
-    func calculate(_ firstText: String, _ secondText: String) -> String{
-        guard let firstInt = Int(firstText), let secondInt = Int(secondText) else { return "0" }
+    func calculate(_ firstInt: Float, _ secondInt: Float) -> String {
+        // TODO: Implement test for this function!
         switch self {
         case .devide:
-            return String(firstInt/secondInt)
+            if secondInt == 0 {
+                return "ゼロで割らないで"
+            } else {
+                return String(firstInt/secondInt)
+            }
         case .multiply:
             return String(firstInt*secondInt)
         case .plus:
