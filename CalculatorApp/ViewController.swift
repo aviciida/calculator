@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StaticHelper
 
 class ViewController: UIViewController {
 
@@ -50,6 +51,8 @@ class ViewController: UIViewController {
     
     @IBAction func addNumber (_ sender: UIButton) {
         viewModel.appendNumber(senderTag: sender.tag)
+        let helper = StaticHelper()
+        helper.help()
     }
     
 
