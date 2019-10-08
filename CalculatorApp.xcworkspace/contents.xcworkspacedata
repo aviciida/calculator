@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:DynamicHelper/DynamicHelper.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:StaticHelper/StaticHelper.xcodeproj">
    </FileRef>
    <FileRef

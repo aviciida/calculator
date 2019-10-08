@@ -8,6 +8,7 @@
 
 import UIKit
 import StaticHelper
+import DynamicHelper
 
 class ViewController: UIViewController {
 
@@ -53,6 +54,9 @@ class ViewController: UIViewController {
         viewModel.appendNumber(senderTag: sender.tag)
         let helper = StaticHelper()
         helper.help()
+        
+        let dynamicHelper = DynamicHelper()
+        dynamicHelper.helpDynamically()
     }
     
 
